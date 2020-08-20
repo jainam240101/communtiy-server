@@ -7,6 +7,7 @@ import { createUserInput, loginInput, updateUserInput } from "../inputs/input";
 import jwt from "jsonwebtoken";
 import { getConnection } from "typeorm";
 import { Project } from "../../../entities/Project";
+import {ApolloError } from "apollo-server-express"
 
 export const registerUser = async ({
   name,
@@ -28,7 +29,7 @@ export const registerUser = async ({
       updatedAt: new Date(),
     }).save();
   } catch (error) {
-    return undefined;
+    throw new ApolloError("Some Error Occured in creating a User");
   }
 };
 
@@ -54,7 +55,7 @@ export const loginResolver = async ({
       token: token,
     };
   } catch (error) {
-    throw new Error("Some Error Occured");
+    throw new ApolloError("Invalid Credentials");
   }
 };
 
@@ -78,7 +79,7 @@ export const updateUser = async ({
     user.updatedAt=new Date()
     return user.save();
   } catch (error) {
-    throw new Error("Some Error Occured in Saving ");
+    throw new ApolloError("Some Error occured in updating the user");
   }
 };
 
@@ -92,7 +93,7 @@ export const deleteUserresolver = async (user: User) => {
       .execute();
     return "Success";
   } catch (error) {
-    throw new Error("Some Error Occured in Deleting");
+    throw new ApolloError("Some Error Occured in Deleting");
   }
 };
 
