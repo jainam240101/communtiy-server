@@ -7,10 +7,13 @@ import { buildSchema } from "type-graphql";
 import { createConnection } from "typeorm";
 import { UserResolver } from "./Resolvers/Users/users";
 import { ProjectResolver } from "./Resolvers/Projects/Project";
+import { IssueResolver } from "./Resolvers/Issues/Issues";
 
 const main = async () => {
   await createConnection();
-  const schema = await buildSchema({ resolvers: [UserResolver,ProjectResolver] });
+  const schema = await buildSchema({
+    resolvers: [UserResolver, ProjectResolver, IssueResolver],
+  });
   const apolloserver = new ApolloServer({
     schema: schema,
     context: ({ req }: any) => ({ req }),

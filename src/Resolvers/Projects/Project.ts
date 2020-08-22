@@ -30,7 +30,7 @@ export class ProjectResolver {
   @Query(() => [Project])
   async projectsInfo(@Arg("data") { id }: projectInfo) {
     var projects: Project | Project[] | undefined;
-    if (id !== undefined) {
+    if (id.length !== 0) {
       projects = await Project.findOne({
         where: {
           uniqueid: id,
@@ -62,12 +62,14 @@ export class ProjectResolver {
     @Ctx() ctx: MyContext,
     @Arg("data") { definition, totalMembers, techStack }: createProjectInput
   ): Promise<Project | undefined> {
-    return createProjectResolver({
+    const result: Project = await createProjectResolver({
       definition,
       totalMembers,
       techStack,
       user: ctx.req.currentUser.uniqueid,
     });
+    result.projectOwner = ctx.req.currentUser;
+    return result;
   }
 
   @UseMiddleware(isAuth)
@@ -77,13 +79,15 @@ export class ProjectResolver {
     @Arg("data")
     { uniqueid, definition, totalMembers, techStack }: updateProjectInput
   ): Promise<Project | undefined> {
-    return updateProjectresolver({
+    const result = await updateProjectresolver({
       uniqueid,
       user: ctx.req.currentUser.uniqueid,
       definition,
       totalMembers,
       techStack,
     });
+    result!.projectOwner = ctx.req.currentUser;
+    return result;
   }
 
   @UseMiddleware(isAuth)
@@ -93,10 +97,12 @@ export class ProjectResolver {
     @Arg("data")
     { uniqueid }: deleteProjectInput
   ): Promise<Project | undefined> {
-    return await deleteProjectresolver({
+    const result = await deleteProjectresolver({
       user: ctx.req.currentUser.uniqueid,
       uniqueid: uniqueid,
     });
+    result!.projectOwner = ctx.req.currentUser;
+    return result;
   }
 
   @UseMiddleware(isAuth)
