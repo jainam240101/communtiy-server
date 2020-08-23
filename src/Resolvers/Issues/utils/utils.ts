@@ -18,7 +18,6 @@ export const createIssueResolver = ({
       issueName: issueName,
       issue: issue,
       tag: tag,
-      answers: {},
       ownerId: user,
     }).save();
   } catch (error) {
@@ -75,6 +74,6 @@ export const deleteIssueResolver = async (user: string, issueId: string) => {
       .execute();
     return issue;
   } catch (error) {
-    throw new ApolloError("Some Propblem occured while Deleting ");
+    throw new ApolloError("Some Problem occured while Deleting ");
   }
 };

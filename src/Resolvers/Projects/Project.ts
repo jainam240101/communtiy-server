@@ -19,7 +19,6 @@ import {
   createProjectResolver,
   updateProjectresolver,
   deleteProjectresolver,
-  applyforProjectresolver,
 } from "./utils/utils";
 import { MyContext } from "../../Types/Context";
 import { Project } from "../../entities/Project";
@@ -102,20 +101,6 @@ export class ProjectResolver {
       uniqueid: uniqueid,
     });
     result!.projectOwner = ctx.req.currentUser;
-    return result;
-  }
-
-  @UseMiddleware(isAuth)
-  @Mutation(() => Project, { nullable: true })
-  async userApply(
-    @Arg("projectId") projectId: string,
-    @Ctx() Ctx: MyContext
-  ): Promise<Project | undefined | String> {
-    const result = await applyforProjectresolver(
-      projectId,
-      Ctx.req.currentUser.uniqueid
-    );
-    console.log(result);
     return result;
   }
 }

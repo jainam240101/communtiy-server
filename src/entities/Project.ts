@@ -20,11 +20,11 @@ export class Project extends BaseEntity {
 
   @Field()
   @Column()
-  totalMembers: number;
+    formLink:string
 
-  @Field(() => [String])
-  @Column("varchar", { array: true })
-  usersApplied: String[];
+  @Field()
+  @Column()
+  totalMembers: number;
 
   @Field(() => [String], { nullable: true })
   @Column("varchar", { array: true, nullable: true })

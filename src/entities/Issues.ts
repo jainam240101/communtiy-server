@@ -26,12 +26,6 @@ export class Issue extends BaseEntity {
   @Column()
   tag: string;
 
-  @Field(() => [String])
-  @Column("simple-json")
-  answers: {
-    writtenBy: string;
-    answer: string;
-  };
 
   @Column()
   ownerId: string;

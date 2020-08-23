@@ -22,7 +22,6 @@ export const createProjectResolver = async ({
       techStack: techStack,
       uniqueid: uuidv4(),
       totalMembers: totalMembers,
-      usersApplied: [],
       ownerId: user,
     }).save();
   } catch (error) {
@@ -83,26 +82,4 @@ export const deleteProjectresolver = async ({
   } catch (error) {
     throw new ApolloError("Some Error Occured in Deleting");
   }
-};
-
-export const applyforProjectresolver = async (
-  projectId: string,
-  userId: string
-): Promise<String | Project | undefined> => {
-  const project = await Project.findOne({
-    where: {
-      uniqueid: projectId,
-    },
-  });
-  if (project === undefined) {
-    throw new ApolloError("No Such Project Found");
-  }
-  if (String(project.ownerId) === userId) {
-    throw new ApolloError("The Owner of the project cant apply");
-  }
-  if (project.usersApplied.includes(userId)) {
-    throw new ApolloError("User has Already Applied")
-  }
-  project.usersApplied.push(userId);
-  return project.save();
 };
