@@ -20,7 +20,7 @@ export class Project extends BaseEntity {
 
   @Field()
   @Column()
-    formLink:string
+  formLink: string;
 
   @Field()
   @Column()

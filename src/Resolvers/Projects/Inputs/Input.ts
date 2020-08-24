@@ -10,6 +10,9 @@ export class createProjectInput {
   definition: string;
 
   @Field()
+    formLink:string
+
+  @Field()
   @IsNumber()
   totalMembers: number;
 
@@ -29,6 +32,9 @@ export class updateProjectInput {
   @Length(1, 2000)
   definition: string;
   
+  @Field({ nullable: true })
+  formLink: string
+
   @Field({ nullable: true })
   @IsNumber()
   totalMembers: number;

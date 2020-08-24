@@ -59,12 +59,14 @@ export class ProjectResolver {
   @Mutation(() => Project)
   async createProject(
     @Ctx() ctx: MyContext,
-    @Arg("data") { definition, totalMembers, techStack }: createProjectInput
+    @Arg("data")
+    { definition, formLink, totalMembers, techStack }: createProjectInput
   ): Promise<Project | undefined> {
     const result: Project = await createProjectResolver({
       definition,
       totalMembers,
       techStack,
+      formLink,
       user: ctx.req.currentUser.uniqueid,
     });
     result.projectOwner = ctx.req.currentUser;
@@ -76,12 +78,19 @@ export class ProjectResolver {
   async updateProject(
     @Ctx() ctx: MyContext,
     @Arg("data")
-    { uniqueid, definition, totalMembers, techStack }: updateProjectInput
+    {
+      uniqueid,
+      definition,
+      totalMembers,
+      formLink,
+      techStack,
+    }: updateProjectInput
   ): Promise<Project | undefined> {
     const result = await updateProjectresolver({
       uniqueid,
       user: ctx.req.currentUser.uniqueid,
       definition,
+      formLink,
       totalMembers,
       techStack,
     });

@@ -14,12 +14,14 @@ export const createProjectResolver = async ({
   definition,
   totalMembers,
   techStack,
+  formLink,
   user,
 }: createProjectInput) => {
   try {
     return Project.create({
       definition: definition,
       techStack: techStack,
+      formLink: formLink,
       uniqueid: uuidv4(),
       totalMembers: totalMembers,
       ownerId: user,
@@ -33,6 +35,7 @@ export const updateProjectresolver = async ({
   definition,
   uniqueid,
   totalMembers,
+  formLink,
   techStack,
   user,
 }: updateProjectInput): Promise<Project | undefined> => {
@@ -51,6 +54,9 @@ export const updateProjectresolver = async ({
     }
     if (totalMembers !== undefined) {
       project.totalMembers = totalMembers;
+    }
+    if (formLink !== undefined) {
+      project.formLink = formLink;
     }
     if (techStack !== undefined) {
       project.techStack = techStack;
