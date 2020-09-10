@@ -21,7 +21,7 @@ import { MyContext } from "../../Types/Context";
 import { isAuth } from "../../Middlewares/UserAuth/isAuth";
 import { Project } from "../../entities/Project";
 
-@Resolver()
+@Resolver(() => User)
 export class UserResolver {
   @Query(() => [User])
   async allUsers() {
