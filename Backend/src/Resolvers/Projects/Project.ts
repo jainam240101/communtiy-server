@@ -44,7 +44,7 @@ export class ProjectResolver {
     }
     projects = await Project.find();
     var allprojects: any[] = [];
-    for (var i = 0; i < projects.length; i++) {
+    for (var i = projects.length - 1; i >= 0; i--) {
       var owner = await User.findOne({
         where: {
           uniqueid: projects[i].ownerId,
@@ -82,7 +82,7 @@ export class ProjectResolver {
     {
       uniqueid,
       definition,
-        totalMembers,
+      totalMembers,
       title,
       formLink,
       techStack,
