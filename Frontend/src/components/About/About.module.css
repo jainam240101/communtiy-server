@@ -1,0 +1,92 @@
+/** @format */
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap");
+
+.Container {
+  width: 100vw;
+  height: 87vh;
+  display: flex;
+}
+
+.heading {
+  position: absolute;
+  width: 739px;
+  height: 88px;
+  left: 73px;
+  margin-top: 130px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 57px;
+  line-height: 88px;
+  text-align: center;
+  color: #000000;
+}
+
+.tag {
+  position: absolute;
+  width: 531px;
+  height: 85px;
+  margin-left: 163px;
+  margin-top: 220px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 37px;
+  text-align: center;
+  color: #686161;
+}
+
+.joinBtn {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 37px;
+  text-align: center;
+  color: #ffffff;
+  flex: none;
+  order: 0;
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  padding: 6px 33px;
+  width: 208px;
+  height: 49px;
+  margin-left: 320px;
+  margin-top: 340px;
+  background: #2b3558;
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+.explore {
+  /* background-color: teal; */
+  margin-top: 130px;
+  position: absolute;
+  margin-left: 42%;
+}
+
+.exploreBtn {
+  display: flex;
+  flex-direction: row;
+  padding: 18px 50px;
+  width: 210px;
+  height: 58px;
+  background: #2b3558;
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.5);
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 17px;
+  text-align: center;
+  color: #ffffff;
+  align-self: center;
+}
+
+.image {
+  /* background-color: teal; */
+  margin-left: 21%;
+  margin-top: 7%;
+}

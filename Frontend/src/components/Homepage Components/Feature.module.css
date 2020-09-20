@@ -1,0 +1,45 @@
+/** @format */
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans&family=Open+Sans:ital,wght@1,300&display=swap");
+
+.Container {
+    display: flex;
+  /* background-color: tomato; */
+  height: 90vh;
+  width: 100vw;
+}
+.Heading {
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 45px;
+  line-height: 109px;
+  margin-left: 7%;
+  width: 200px;
+}
+
+.description {
+  color: #969292;
+  margin-left: 5%;
+  font-size: 30px;
+  width: 40vw;
+  font-family: Open-Sans;
+}
+
+.description2 {
+  /* background-color: tomato; */
+  margin-top: 3%;
+  line-height: 41px;
+  letter-spacing: 2px;
+  margin-left: 5%;
+  font-size: 25px;
+  width: 55vw;
+  font-family: Open-Sans;
+}
+
+.image{
+    /* background-color: teal; */
+    margin-left: 5%;
+    /* height:45vh; */
+}

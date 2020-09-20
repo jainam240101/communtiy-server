@@ -1,0 +1,28 @@
+/** @format */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+.Container {
+  width: 85vw;
+  height: 38vh;
+  /* background-color: coral; */
+  border: 2px solid black;
+  margin-top: 3%;
+  margin-bottom: 2%;
+  margin-left: 7%;
+}
+
+.heading {
+    font-size: 25px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+    position: absolute;
+    padding-left: 3%;
+    padding-top: 1%;
+}
+
+.LeftContainer{
+    background-color: coral;
+    width: 50vw;
+}

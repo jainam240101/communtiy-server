@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans&family=Open+Sans:ital,wght@1,300&display=swap");
+
+.Copyright{
+    width:100%;
+    height:250px;
+    display: flex;
+    justify-content: space-around;
+    border-top:1px solid gray;
+    /* background-color: #4b6584; */
+}
+
+.logo{
+    height:100%;
+    width:10vw;
+    font-size: 20px;
+    /* background-color: hotpink; */
+}
+
+.functions{
+    height: 100%;
+    width: 20vw;
+    /* margin-left: 10%; */
+    /* background-color: greenyellow; */
+}
+
+.functions h3{
+    font-size: 24px;
+    font-family: Open-Sans;
+    color:#2f3542;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.list{
+    list-style: none;
+    margin-top:15%;
+    height:16vh;
+    /* background-color: khaki; */
+}
+
+.list li{
+    margin-top: 40px;
+    text-align: center;
+    font-family: Open-Sans;
+    letter-spacing: 0.4px;
+    font-size: 20px;
+    color:#ff7f50;
+}
+
+@media (max-width:800px){
+    .Copyright{
+        flex-flow: column;
+        justify-content: left;
+    }
+    .functions{
+        /* background-color: crimson; */
+        width: 100vw;
+        margin-top: 3%;
+    }
+    .list {
+        margin-top:1%;
+    }
+    .list li{
+        margin-top: 19px;
+    }
+}
