@@ -60,10 +60,11 @@ export class ProjectResolver {
   async createProject(
     @Ctx() ctx: MyContext,
     @Arg("data")
-    { definition, formLink, totalMembers, techStack }: createProjectInput
+    { definition, formLink, totalMembers, techStack, title }: createProjectInput
   ): Promise<Project | undefined> {
     const result: Project = await createProjectResolver({
       definition,
+      title,
       totalMembers,
       techStack,
       formLink,
@@ -81,13 +82,15 @@ export class ProjectResolver {
     {
       uniqueid,
       definition,
-      totalMembers,
+        totalMembers,
+      title,
       formLink,
       techStack,
     }: updateProjectInput
   ): Promise<Project | undefined> {
     const result = await updateProjectresolver({
       uniqueid,
+      title,
       user: ctx.req.currentUser.uniqueid,
       definition,
       formLink,

@@ -10,7 +10,10 @@ export class createProjectInput {
   definition: string;
 
   @Field()
-    formLink:string
+  formLink: string;
+
+  @Field()
+  title: string;
 
   @Field()
   @IsNumber()
@@ -27,35 +30,38 @@ export class createProjectInput {
 export class updateProjectInput {
   @Field({ nullable: false })
   uniqueid: string;
-  
+
+  @Field({ nullable: true })
+  title: string;
+
   @Field({ nullable: true })
   @Length(1, 2000)
   definition: string;
-  
+
   @Field({ nullable: true })
-  formLink: string
+  formLink: string;
 
   @Field({ nullable: true })
   @IsNumber()
   totalMembers: number;
-  
+
   @Field(() => [String], { nullable: true })
   @IsArray()
   techStack: String[];
-  
+
   user: string;
 }
 
 @InputType()
-export class deleteProjectInput{
+export class deleteProjectInput {
   @Field({ nullable: false })
   uniqueid: string;
-  
+
   user: string;
 }
 
 @InputType()
-export class projectInfo{
+export class projectInfo {
   @Field({ nullable: true })
-  id:string
+  id: string;
 }

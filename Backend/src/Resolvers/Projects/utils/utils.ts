@@ -13,12 +13,14 @@ import { ApolloError } from "apollo-server-express";
 export const createProjectResolver = async ({
   definition,
   totalMembers,
+  title,
   techStack,
   formLink,
   user,
 }: createProjectInput) => {
   try {
     return Project.create({
+      title: title,
       definition: definition,
       techStack: techStack,
       formLink: formLink,
@@ -36,6 +38,7 @@ export const updateProjectresolver = async ({
   uniqueid,
   totalMembers,
   formLink,
+  title,
   techStack,
   user,
 }: updateProjectInput): Promise<Project | undefined> => {
@@ -51,6 +54,9 @@ export const updateProjectresolver = async ({
     }
     if (definition !== undefined) {
       project.definition = definition;
+    }
+    if (title !== undefined) {
+      project.title = title;
     }
     if (totalMembers !== undefined) {
       project.totalMembers = totalMembers;

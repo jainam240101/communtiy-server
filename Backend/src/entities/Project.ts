@@ -15,6 +15,10 @@ export class Project extends BaseEntity {
   uniqueid: string;
 
   @Field()
+  @Column()
+  title: string;
+
+  @Field()
   @Column({ length: 2000 })
   definition: string;
 
