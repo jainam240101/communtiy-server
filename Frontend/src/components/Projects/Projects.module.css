@@ -1,11 +1,17 @@
 /** @format */
-
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+}
 .Container {
   width: 85vw;
   height: 38vh;
   /* background-color: coral; */
+  display: flex;
   border: 2px solid black;
   margin-top: 3%;
   margin-bottom: 2%;
@@ -13,16 +19,78 @@
 }
 
 .heading {
-    font-size: 25px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 700;
-    letter-spacing: 0.7px;
-    position: absolute;
-    padding-left: 3%;
-    padding-top: 1%;
+  font-size: 27px;
+  font-family: "Roboto Slab", serif;
+  font-weight: bolder;
+  letter-spacing: 1px;
+  /* position: absolute; */
+  padding-left: 3%;
+  padding-top: 1%;
 }
 
-.LeftContainer{
-    background-color: coral;
-    width: 50vw;
+.description {
+  margin-top: 2%;
+  margin-left: 2%;
+  width: 65vw;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 20px;
+}
+
+.LeftContainer {
+  /* background-color: coral; */
+  width: 66vw;
+  border-right: 1px solid black;
+}
+
+.applyBtn {
+  margin-top: 2%;
+  margin-left: 6%;
+  background-color: #00b894;
+  color: white;
+  border: none;
+  height: 5vh;
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 17px;
+  letter-spacing: 1px;
+  border-radius: 5px;
+  padding: 5px 30px;
+  padding-bottom: 8px;
+}
+
+.bottomContainer {
+  display: flex;
+}
+
+.techStackContainer {
+  height: 5vh;
+  padding-bottom: 3px;
+  padding-left: 8px;
+  padding-right: 8px;
+  background-color: #2d3436;
+  margin-left: 10%;
+  margin-top: 1.6%;
+  border-radius: 20px;
+}
+
+.rightContainer {
+  height: 38vh;
+  display: flex;
+  flex-direction: column;
+  width: auto;
+}
+
+.contact {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 20px;
+  padding-left:43%;
+  align-items: center;
+}
+
+.contactInfo{
+  padding-top: 25%;
+  width: 100%;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 20px;
+  padding-left: 11%;
+  letter-spacing: 1px;
 }
