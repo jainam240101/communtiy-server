@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState, useCallback, useEffect } from "react";
+import React from "react";
 import Page from "../../Layout/Page/Page";
 import { useQuery } from "@apollo/client";
 import { all_projects } from "./Queries";
