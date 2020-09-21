@@ -1,7 +1,7 @@
 /** @format */
 
 import { InputType, Field } from "type-graphql";
-import { Length, IsNumber, IsArray } from "class-validator";
+import { Length, IsArray } from "class-validator";
 
 @InputType()
 export class createProjectInput {
@@ -16,8 +16,7 @@ export class createProjectInput {
   title: string;
 
   @Field()
-  @IsNumber()
-  totalMembers: number;
+  tag: string;
 
   @Field(() => [String])
   @IsArray()
@@ -42,8 +41,7 @@ export class updateProjectInput {
   formLink: string;
 
   @Field({ nullable: true })
-  @IsNumber()
-  totalMembers: number;
+  tag: string;
 
   @Field(() => [String], { nullable: true })
   @IsArray()

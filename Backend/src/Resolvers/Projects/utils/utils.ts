@@ -12,7 +12,7 @@ import { ApolloError } from "apollo-server-express";
 
 export const createProjectResolver = async ({
   definition,
-  totalMembers,
+  tag,
   title,
   techStack,
   formLink,
@@ -25,7 +25,7 @@ export const createProjectResolver = async ({
       techStack: techStack,
       formLink: formLink,
       uniqueid: uuidv4(),
-      totalMembers: totalMembers,
+      tag: tag,
       ownerId: user,
     }).save();
   } catch (error) {
@@ -36,7 +36,7 @@ export const createProjectResolver = async ({
 export const updateProjectresolver = async ({
   definition,
   uniqueid,
-  totalMembers,
+  tag,
   formLink,
   title,
   techStack,
@@ -58,8 +58,8 @@ export const updateProjectresolver = async ({
     if (title !== undefined) {
       project.title = title;
     }
-    if (totalMembers !== undefined) {
-      project.totalMembers = totalMembers;
+    if (tag !== undefined) {
+      project.tag = tag;
     }
     if (formLink !== undefined) {
       project.formLink = formLink;

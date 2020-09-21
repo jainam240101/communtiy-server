@@ -28,7 +28,7 @@ export class Project extends BaseEntity {
 
   @Field()
   @Column()
-  totalMembers: number;
+  tag: string;
 
   @Field(() => [String], { nullable: true })
   @Column("varchar", { array: true, nullable: true })

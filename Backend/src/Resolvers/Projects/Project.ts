@@ -60,12 +60,12 @@ export class ProjectResolver {
   async createProject(
     @Ctx() ctx: MyContext,
     @Arg("data")
-    { definition, formLink, totalMembers, techStack, title }: createProjectInput
+    { definition, formLink, tag, techStack, title }: createProjectInput
   ): Promise<Project | undefined> {
     const result: Project = await createProjectResolver({
       definition,
       title,
-      totalMembers,
+      tag,
       techStack,
       formLink,
       user: ctx.req.currentUser.uniqueid,
@@ -82,7 +82,7 @@ export class ProjectResolver {
     {
       uniqueid,
       definition,
-      totalMembers,
+      tag,
       title,
       formLink,
       techStack,
@@ -94,7 +94,7 @@ export class ProjectResolver {
       user: ctx.req.currentUser.uniqueid,
       definition,
       formLink,
-      totalMembers,
+      tag,
       techStack,
     });
     result!.projectOwner = ctx.req.currentUser;
