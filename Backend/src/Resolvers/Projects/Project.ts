@@ -7,6 +7,8 @@ import {
   UseMiddleware,
   Ctx,
   Query,
+  FieldResolver,
+  Root,
 } from "type-graphql";
 import {
   createProjectInput,
@@ -19,13 +21,27 @@ import {
   createProjectResolver,
   updateProjectresolver,
   deleteProjectresolver,
+  projectDisplayTagResolver,
 } from "./utils/utils";
 import { MyContext } from "../../Types/Context";
 import { Project } from "../../entities/Project";
 import { User } from "../../entities/User";
+import { ApolloError } from "apollo-server-express";
 
-@Resolver()
+@Resolver(() => Project)
 export class ProjectResolver {
+  @FieldResolver()
+  async projectOwner(@Root() parent: Project) {
+    try {
+      const owner: User | undefined = await User.findOne({
+        where: { uniqueid: parent.ownerId },
+      });
+      return owner;
+    } catch (error) {
+      throw new ApolloError("Project Owner Not Found");
+    }
+  }
+
   @Query(() => [Project])
   async projectsInfo(@Arg("data") { id }: projectInfo) {
     var projects: Project | Project[] | undefined;
@@ -35,24 +51,16 @@ export class ProjectResolver {
           uniqueid: id,
         },
       });
-      const owner = await User.findOne({
-        where: {
-          uniqueid: projects?.ownerId,
-        },
-      });
-      return [{ ...projects, projectOwner: owner }];
+      return [projects];
     }
     projects = await Project.find();
-    var allprojects: any[] = [];
-    for (var i = projects.length - 1; i >= 0; i--) {
-      var owner = await User.findOne({
-        where: {
-          uniqueid: projects[i].ownerId,
-        },
-      });
-      allprojects.push({ ...projects[i], projectOwner: owner });
-    }
-    return allprojects;
+    return projects;
+  }
+
+  @Query(() => [Project])
+  async projectDisplayTag(@Arg("tag") tag: string): Promise<Project[]> {
+    const result: Project[] = await projectDisplayTagResolver(tag);
+    return result;
   }
 
   @UseMiddleware(isAuth)

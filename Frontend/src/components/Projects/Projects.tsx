@@ -7,7 +7,7 @@ import TechStack from "./Tech Stack/TechStack";
 interface Props {
   title: string;
   description: string;
-  totalMembers: number;
+  tag: string;
   techStack: string[];
   formLink: string;
   contact: {
@@ -22,16 +22,15 @@ const Projects: React.FC<Props> = ({
   formLink,
   title,
   techStack,
-  totalMembers,
+  tag,
 }) => {
-  console.log(contact);
-  console.log(formLink);
-  console.log(techStack);
-  console.log(totalMembers);
   return (
     <div className={classes.Container}>
       <div className={classes.LeftContainer}>
-        <p className={classes.heading}>{title}</p>
+        <div className={classes.headerContainer}>
+          <p className={classes.heading}>{title}</p>
+          <div className={classes.tag}>{tag}</div>
+        </div>
         <div className={classes.description}>{description}</div>
         <div className={classes.bottomContainer}>
           <button className={classes.applyBtn}>Apply</button>
@@ -44,7 +43,7 @@ const Projects: React.FC<Props> = ({
         <div className={classes.contact}>Contact</div>
         <div className={classes.contactInfo}>
           Name : {contact.name}
-          <br/>
+          <br />
           Email: {contact.email}
         </div>
       </div>

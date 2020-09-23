@@ -3,6 +3,7 @@
 import { channels } from "../../../entities/channels";
 import { ApolloError } from "apollo-server-express";
 import { v4 } from "uuid";
+import { Message } from "../../../entities/messages";
 interface createMessage {
   channelId: string;
   message: string;
@@ -11,10 +12,6 @@ interface createMessage {
   usersName?: string;
   messageId?: string;
 }
-
-const createMessages = (messages: any) => {
-  return JSON.parse(messages);
-};
 
 const findChannel = (channelId: string, serverId: string) => {
   return channels.findOne({
@@ -44,7 +41,15 @@ export const createMessageResolver = async ({
       usersName: usersName,
       timestamp: new Date(),
     });
-    channel?.message.Message.push(newMessage);
+    var messages: Message[] = [];
+    if (channel?.message.Message.length !== 0) {
+      channel?.message.Message.map((element) => {
+        messages.push(element);
+      });
+    }
+    messages.push(newMessage);
+    var finalResult: any = messages;
+    channel!.message.Message = finalResult;
     channel?.save();
     return true;
   } catch (error) {
@@ -64,20 +69,32 @@ export const updateMessageResolver = async ({
       channelId,
       serverId
     );
-    var result: any = createMessages(channel?.message.Message);
+    var result: Message[] = temp(channel?.message.Message);
     for (var i = 0; i < result.length; i++) {
       if (result[i].messageId === messageId && result[i].usersId === userId) {
         result[i].message = message;
         break;
       }
     }
-    result = JSON.stringify(result);
-    channel!.message.Message = result;
+    var finalValues: any[] = [];
+    result.forEach((element) => {
+      finalValues.push(JSON.stringify(element));
+    });
+    channel!.message.Message = finalValues;
+    console.log(channel?.message.Message);
     await channel?.save();
     return true;
   } catch (error) {
     throw new ApolloError("Some Error occured while updating the message");
   }
+};
+
+const temp = (messages: any) => {
+  var allMessages: Message[] = [];
+  messages.forEach((element: any) => {
+    allMessages.push(JSON.parse(element));
+  });
+  return allMessages;
 };
 
 export const readMessages = async ({ channelId, serverId }: any) => {
@@ -86,10 +103,14 @@ export const readMessages = async ({ channelId, serverId }: any) => {
       channelId,
       serverId
     );
-    var result: any = createMessages(channel?.message.Message);
+    var messages = []
+    for (var i = channel!.message.Message.length - 1;i>=0; i--){
+      messages.push(channel?.message.Message[i])
+    }
+    var result: Message[] = temp(messages);
     return result;
   } catch (error) {
-    throw new ApolloError("Some Error occured while Reading the");
+    throw new ApolloError(error);
   }
 };
 
@@ -104,14 +125,17 @@ export const deleteMessages = async ({
       channelId,
       serverId
     );
-    var result: any = createMessages(channel?.message.Message);
+    var result: Message[] = temp(channel?.message.Message);
     for (var i = 0; i < result.length; i++) {
       if (result[i].messageId === messageId && result[i].usersId === userId) {
         result.splice(i, 1);
       }
     }
-    result = JSON.stringify(result);
-    channel!.message.Message = result;
+    var finalValues: any = [];
+    result.forEach((element) => {
+      finalValues.push(JSON.stringify(element));
+    });
+    channel!.message.Message = finalValues;
     await channel?.save();
     return true;
   } catch (error) {

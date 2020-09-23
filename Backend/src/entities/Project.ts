@@ -1,7 +1,13 @@
 /** @format */
 
 import { ObjectType, Field } from "type-graphql";
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column } from "typeorm";
+import {
+  Entity,
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+} from "typeorm";
 import { User } from "./User";
 
 @ObjectType()
@@ -39,4 +45,8 @@ export class Project extends BaseEntity {
 
   @Field(() => User)
   projectOwner: User;
+
+  @Field()
+  @CreateDateColumn()
+  createdAt: Date;
 }

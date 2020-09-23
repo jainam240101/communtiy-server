@@ -14,6 +14,7 @@ export class Message {
   @Field()
   usersName: string;
 
+  @Field()
   usersId: string;
 
   @Field()

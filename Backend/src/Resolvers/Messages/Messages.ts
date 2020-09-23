@@ -128,17 +128,18 @@ export class messageResolver {
     @Ctx() ctx: MyContext,
     @Arg("data") { messageId, serverId, channelId }: deleteMessageInput
   ) {
-    deleteMessages({
+    const messages = deleteMessages({
       messageId,
       serverId,
       channelId,
       userId: ctx.req.currentUser.uniqueid,
     });
+    return messages;
   }
 
   @Query(() => [Message])
   async readMessage(@Arg("data") { channelId, serverId }: readMessageInput) {
-    const messages = readMessages({ channelId, serverId });
+    const messages = await readMessages({ channelId, serverId });
     this.channelId = channelId;
     this.serverId = serverId;
     return messages;

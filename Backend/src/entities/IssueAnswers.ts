@@ -1,7 +1,13 @@
 /** @format */
 
 import { ObjectType, Field, ID } from "type-graphql";
-import { Entity, BaseEntity, Column, PrimaryColumn } from "typeorm";
+import {
+  Entity,
+  BaseEntity,
+  Column,
+  PrimaryColumn,
+  CreateDateColumn,
+} from "typeorm";
 import { User } from "./User";
 
 @ObjectType()
@@ -19,9 +25,11 @@ export class IssueAnswers extends BaseEntity {
   @Column({ length: 2000 })
   answer: string;
 
-  @Field()
   @Column()
   answeredBy: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
 
   @Field()
   answerOwner: User;

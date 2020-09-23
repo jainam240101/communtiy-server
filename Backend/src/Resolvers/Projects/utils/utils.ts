@@ -25,6 +25,7 @@ export const createProjectResolver = async ({
       techStack: techStack,
       formLink: formLink,
       uniqueid: uuidv4(),
+      createdAt: new Date(),
       tag: tag,
       ownerId: user,
     }).save();
@@ -93,5 +94,19 @@ export const deleteProjectresolver = async ({
     return project;
   } catch (error) {
     throw new ApolloError("Some Error Occured in Deleting");
+  }
+};
+
+export const projectDisplayTagResolver = async (tag: string) => {
+  try {
+    const projects: Project[] = await Project.find({
+      where: {
+        tag: tag,
+      },
+      order: { createdAt: "DESC" },
+    });
+    return projects
+  } catch (error) {
+    throw new ApolloError("Some error occured");
   }
 };

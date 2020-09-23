@@ -19,6 +19,7 @@ export const createAnswerResolver = async ({
   try {
     return IssueAnswers.create({
       id: v4(),
+      createdAt: new Date(),
       issueId: issueId,
       answer: answer,
       answeredBy: answeredBy,
@@ -48,20 +49,20 @@ export const updateAnswerResolver = async ({
 };
 
 export const deleteAnswerResolver = async (id: string) => {
-    try {
-        const answer = await IssueAnswers.findOne({
-            where: {
-                id:id
-            }
-        })
-        await getConnection()
-            .createQueryBuilder()
-            .delete()
-            .from(IssueAnswers)
-            .where({ id: id })
-            .execute()
-        return answer
-    } catch (error) {
-        throw new ApolloError("Some Problem occured while Deleting ");
-    }
-}
+  try {
+    const answer = await IssueAnswers.findOne({
+      where: {
+        id: id,
+      },
+    });
+    await getConnection()
+      .createQueryBuilder()
+      .delete()
+      .from(IssueAnswers)
+      .where({ id: id })
+      .execute();
+    return answer;
+  } catch (error) {
+    throw new ApolloError("Some Problem occured while Deleting ");
+  }
+};

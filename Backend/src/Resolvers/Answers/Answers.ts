@@ -1,6 +1,13 @@
 /** @format */
 
-import { Resolver, Mutation, UseMiddleware, Arg, Ctx } from "type-graphql";
+import {
+  Resolver,
+  Mutation,
+  UseMiddleware,
+  Arg,
+  Ctx,
+  Query,
+} from "type-graphql";
 import { IssueAnswers } from "../../entities/IssueAnswers";
 import { isAuth } from "../../Middlewares/UserAuth/isAuth";
 import { createAnswerInput, updateAnswer } from "./inputs/inputs";
@@ -10,9 +17,42 @@ import {
   deleteAnswerResolver,
 } from "./utils/utils";
 import { MyContext } from "../../Types/Context";
+import { ApolloError } from "apollo-server-express";
+import { User } from "../../entities/User";
 
 @Resolver()
 export class issueAnswer {
+  @Query(() => [IssueAnswers])
+  async issueAnswers(@Arg("id") id: string) {
+    if (id.length === 0) {
+      throw new ApolloError("Id Not given");
+    }
+    const result: IssueAnswers[] = await IssueAnswers.find({
+      where: {
+        issueId: id,
+      },
+      order: {
+        createdAt: "DESC",
+      },
+    });
+    var allIssues: IssueAnswers[] = [];
+    for (var i = 0; i < result.length; i++) {
+      var user: User | undefined = await User.findOne({
+        where: {
+          uniqueid: result[i].answeredBy,
+        },
+      });
+      if (undefined) {
+        throw new ApolloError("Id Not given");
+      }
+      var temp: User = user!;
+      result[i].answerOwner = temp;
+      allIssues.push(result[i]);
+    }
+    // console.log(allIssues);
+    return result;
+  }
+
   @UseMiddleware(isAuth)
   @Mutation(() => IssueAnswers)
   async createAnswer(

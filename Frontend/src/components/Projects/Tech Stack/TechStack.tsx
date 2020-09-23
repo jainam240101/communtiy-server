@@ -31,8 +31,8 @@ interface props {
 const TechStack: React.FC<props> = ({ stack }) => {
   const classes = useStyles();
   var longText: string = "";
-  stack.map((element) => (longText = longText + " " + element));
-
+  stack.map((element) => (longText = longText + " " + element+" ,"));
+  
   return (
     <div>
       <Tooltip title={longText} classes={{ tooltip: classes.customWidth }}>

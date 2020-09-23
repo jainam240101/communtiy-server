@@ -3,11 +3,15 @@
 import React from "react";
 import classes from "./Header.module.css";
 
-const Header = () => {
+interface Props {
+  heading: string;
+}
+
+const Header: React.FC<Props> = ({ heading }) => {
   return (
     <div className={classes.Container}>
       <div className={classes.HeadingContainer}>
-        <div className={classes.Heading}>Projects</div>
+        <div className={classes.Heading}>{heading}</div>
         <div className={classes.filterContainer}>
           <p className={classes.filter}>Filter By</p>
           <p className={classes.filter}>Domain</p>

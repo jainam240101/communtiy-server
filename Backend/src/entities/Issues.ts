@@ -1,7 +1,7 @@
 /** @format */
 
 import { ObjectType, Field } from "type-graphql";
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn } from "typeorm";
 import { User } from "./User";
 
 @ObjectType()
@@ -26,10 +26,13 @@ export class Issue extends BaseEntity {
   @Column()
   tag: string;
 
-
   @Column()
   ownerId: string;
 
   @Field(() => User)
   issueOwner: User | undefined;
+
+  @CreateDateColumn()
+  @Field()
+  createdAt:Date
 }

@@ -18,6 +18,7 @@ export const createIssueResolver = ({
       issueName: issueName,
       issue: issue,
       tag: tag,
+      createdAt: new Date(),
       ownerId: user,
     }).save();
   } catch (error) {
@@ -75,5 +76,21 @@ export const deleteIssueResolver = async (user: string, issueId: string) => {
     return issue;
   } catch (error) {
     throw new ApolloError("Some Problem occured while Deleting ");
+  }
+};
+
+export const tagIssueResolver = async (tag: string) => {
+  try {
+    const allIssues: Issue[] = await Issue.find({
+      where: {
+        tag: tag,
+      },
+      order: {
+        createdAt: "DESC",
+      },
+    });
+    return allIssues;
+  } catch (error) {
+    throw new ApolloError("Some Pr");
   }
 };

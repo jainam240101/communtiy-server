@@ -7,6 +7,8 @@ import {
   Arg,
   Ctx,
   Query,
+  FieldResolver,
+  Root,
 } from "type-graphql";
 import { Issue } from "../../entities/Issues";
 import {
@@ -18,13 +20,29 @@ import {
   createIssueResolver,
   updateIssueResolver,
   deleteIssueResolver,
+  tagIssueResolver,
 } from "./utils/utils";
 import { MyContext } from "../../Types/Context";
 import { isAuth } from "../../Middlewares/UserAuth/isAuth";
 import { User } from "../../entities/User";
+import { ApolloError } from "apollo-server-express";
 
-@Resolver()
+@Resolver(() => Issue)
 export class IssueResolver {
+  @FieldResolver()
+  async issueOwner(@Root() parent: Issue) {
+    try {
+      const owner: User | undefined = await User.findOne({
+        where: {
+          uniqueid: parent.ownerId,
+        },
+      });
+      return owner;
+    } catch (error) {
+      throw new ApolloError("Issue Owner Not found");
+    }
+  }
+
   @Query(() => [Issue])
   async issuesInfo(@Arg("data") { id }: issuesInfoInput) {
     var issues: Issue | Issue[] | undefined;
@@ -34,26 +52,17 @@ export class IssueResolver {
           uniqueid: id,
         },
       });
-      const owner = await User.findOne({
-        where: {
-          uniqueid: issue?.ownerId,
-        },
-      });
-      issue!.issueOwner = owner;
+
       return [issue];
     }
     issues = await Issue.find();
-    var allissues: any[] = [];
-    for (var i = 0; i < issues.length; i++) {
-      var owner = await User.findOne({
-        where: {
-          uniqueid: issues[i].ownerId,
-        },
-      });
-      issues[i]!.issueOwner = owner;
-      allissues.push(issues[i]);
-    }
-    return allissues;
+    return issues;
+  }
+
+  @Query(() => [Issue])
+  async tagIssue(@Arg("tag") tag: string): Promise<Issue[]> {
+    const result: Issue[] = await tagIssueResolver(tag);
+    return result;
   }
 
   @UseMiddleware(isAuth)

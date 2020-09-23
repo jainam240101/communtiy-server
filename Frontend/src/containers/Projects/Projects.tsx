@@ -1,6 +1,6 @@
 /** @format */
 
-import React from "react";
+import React, { useState } from "react";
 import Page from "../../Layout/Page/Page";
 import { useQuery } from "@apollo/client";
 import { all_projects } from "./Queries";
@@ -15,13 +15,13 @@ const Project = () => {
   if (error) return <div>Error!!! {error.message}</div>;
   return (
     <Page>
-      <Header />
+      <Header heading={"Projects"} />
       {data.projectsInfo.map((element: any) => (
         <Projects
           title={element.title}
           contact={element.projectOwner}
           description={element.definition}
-          totalMembers={element.totalMembers}
+          tag={element.tag}
           techStack={element.techStack}
           formLink={element.formLink}
         />

@@ -7,7 +7,7 @@ export const all_projects = gql`
     projectsInfo(data: { id: "" }) {
       title
       definition
-      totalMembers
+      tag
       techStack
       formLink
       projectOwner {
