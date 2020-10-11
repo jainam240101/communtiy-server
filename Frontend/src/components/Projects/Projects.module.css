@@ -3,7 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
 
 * {
   margin: 0;
@@ -11,7 +11,7 @@
 }
 .Container {
   width: 85vw;
-  height: 38vh;
+  /* height: 38vh; */
   /* background-color: coral; */
   display: flex;
   border: 2px solid black;
@@ -44,25 +44,14 @@
   border-right: 1px solid black;
 }
 
-.applyBtn {
-  margin-top: 2%;
-  margin-left: 6%;
-  background-color: #00b894;
-  color: white;
-  border: none;
-  height: 5vh;
-  font-family: "Noto Sans JP", sans-serif;
-  font-size: 17px;
-  letter-spacing: 1px;
-  border-radius: 5px;
-  padding: 5px 30px;
-  padding-bottom: 8px;
-}
-
 .bottomContainer {
   display: flex;
+  margin-bottom: 2%;
 }
-
+.btn{
+  height:5vh;
+  margin-top: 20px;
+}
 .techStackContainer {
   height: 5vh;
   padding-bottom: 3px;
@@ -75,7 +64,7 @@
 }
 
 .rightContainer {
-  height: 38vh;
+  /* height: 38vh; */
   display: flex;
   flex-direction: column;
   width: auto;
@@ -84,11 +73,11 @@
 .contact {
   font-family: "Noto Sans JP", sans-serif;
   font-size: 20px;
-  padding-left:43%;
+  padding-left: 43%;
   align-items: center;
 }
 
-.contactInfo{
+.contactInfo {
   padding-top: 25%;
   width: 100%;
   font-family: "Source Sans Pro", sans-serif;
@@ -97,18 +86,27 @@
   letter-spacing: 1px;
 }
 
-.headerContainer{
+.headerContainer {
   display: flex;
   justify-content: space-around;
 }
 
-.tag{
+.tag {
   margin-top: 1%;
-  padding:5px 10px;
+  padding: 5px 10px;
   font-size: 20px;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: "Nunito Sans", sans-serif;
   background-color: #57606f;
-  color:white;
+  color: white;
   border-radius: 5px;
   font-weight: 600;
+}
+
+.specials{
+  margin-left: 30%;
+  margin-top: 2%;
+}
+
+.Delete{
+  margin-top: 25%;
 }

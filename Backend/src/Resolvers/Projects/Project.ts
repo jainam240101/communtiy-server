@@ -53,7 +53,11 @@ export class ProjectResolver {
       });
       return [projects];
     }
-    projects = await Project.find();
+    projects = await Project.find({
+      order: {
+        createdAt: "DESC",
+      },
+    });
     return projects;
   }
 

@@ -1,9 +1,15 @@
 /** @format */
 
+import { gql } from "@apollo/client";
+/** @format */
+
 import React from "react";
+import { cache } from "../..";
+import { findUniqueId } from "../../Custom Queries/user";
 import classes from "./Projects.module.css";
 import TechStack from "./Tech Stack/TechStack";
-
+import Button from "@material-ui/core/Button";
+import Edit_Delete from "../Edit_Delete/Edit_Delete";
 interface Props {
   title: string;
   description: string;
@@ -13,6 +19,7 @@ interface Props {
   contact: {
     name: string;
     email: string;
+    uniqueid: string;
   };
 }
 
@@ -24,6 +31,9 @@ const Projects: React.FC<Props> = ({
   techStack,
   tag,
 }) => {
+  const data: any = cache.readQuery({
+    query: findUniqueId,
+  });
   return (
     <div className={classes.Container}>
       <div className={classes.LeftContainer}>
@@ -33,10 +43,30 @@ const Projects: React.FC<Props> = ({
         </div>
         <div className={classes.description}>{description}</div>
         <div className={classes.bottomContainer}>
-          <button className={classes.applyBtn}>Apply</button>
+          {data.me.uniqueid === contact.uniqueid ? (
+            <Button
+              style={{ marginLeft: "20px", marginTop: "17px", height: "5vh" }}
+              variant='contained'
+              disabled>
+              Disabled
+            </Button>
+          ) : (
+            <Button
+              style={{ marginLeft: "20px", marginTop: "17px", height: "5vh" }}
+              className={classes.btn}
+              variant='contained'
+              color='primary'>
+              Apply
+            </Button>
+          )}
           <div className={classes.techStackContainer}>
             <TechStack stack={techStack} />
           </div>
+          {data.me.uniqueid === contact.uniqueid ? (
+            <div className={classes.specials}>
+              {/* <Edit_Delete /> */}
+            </div>
+          ) : null}
         </div>
       </div>
       <div className={classes.rightContainer}>

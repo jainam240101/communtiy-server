@@ -55,7 +55,11 @@ export class IssueResolver {
 
       return [issue];
     }
-    issues = await Issue.find();
+    issues = await Issue.find({
+      order: {
+        createdAt: "DESC",
+      },
+    });
     return issues;
   }
 

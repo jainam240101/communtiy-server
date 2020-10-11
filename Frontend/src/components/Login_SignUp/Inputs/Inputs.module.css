@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
+.Container{
+    /* background-color: antiquewhite; */
+    margin-top: 2.5%;
+    margin-left:10%;
+    margin-right:10%;
+}
+
+.heading{
+    font-size: 20px;
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: 1px;
+}
+
+.input{
+    font-family: 'Open Sans', sans-serif;
+    margin-top: 1.5%;
+    height: 4vh;
+    font-size: 17px;
+    width: 29.4vw;
+    border: 1px solid #4C4C4C;
+    padding-left: 1%;
+    padding-top: 0.6%;
+    padding-bottom: 0.6%;
+    border-radius: 5px;
+}
+.textarea{
+    margin-top: 1.5%;
+    height: 20vh;
+    max-height: 47vh;
+    font-size: 17px;
+    width: 29.4vw;
+    border: 1px solid #4C4C4C;
+    padding-left: 1%;
+    font-family: 'Open Sans', sans-serif;
+    padding-top: 0.6%;
+    padding-bottom: 0.6%;
+    resize: vertical;
+    border-radius: 5px;
+}
+.input:focus{
+    border: 1px solid #4C4C4C;
+    border-radius: 5px;
+    
+}

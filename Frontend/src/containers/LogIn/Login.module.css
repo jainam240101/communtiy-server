@@ -1,0 +1,20 @@
+.Container{
+    width: 100vw;
+    height: 100vh;
+    /* padding-bottom: 5%; */
+    background-color: #EEEEEE;
+}
+
+.logo{
+    padding-top: 5%;
+    padding-left: 50%;
+}
+
+.card{
+    margin-top: 2%;
+    margin-left: 33%;
+    background-color: white;
+    width: 37vw;
+    /* height:25vh; */
+}
+

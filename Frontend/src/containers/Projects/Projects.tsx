@@ -18,6 +18,7 @@ const Project = () => {
       <Header heading={"Projects"} />
       {data.projectsInfo.map((element: any) => (
         <Projects
+          key={element.uniqueid}
           title={element.title}
           contact={element.projectOwner}
           description={element.definition}

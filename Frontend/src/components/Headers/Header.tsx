@@ -22,14 +22,18 @@ const Header: React.FC<Props> = ({ heading }) => {
             <option>Cloud</option>
             <option>Machine Learning</option>
           </select>
-          <p className={classes.filter}>Tech Stack</p>
-          <select className={classes.options}>
-            <option>Web Technologies</option>
-            <option>Mobile Technologies</option>
-            <option>AR/VR</option>
-            <option>Cloud</option>
-            <option>Machine Learning</option>
-          </select>
+          {heading === "Issues" ? null : (
+            <div className={classes.techStackContainer}>
+              <p className={classes.filter}>Tech Stack</p>
+              <select className={classes.options}>
+                <option>Web Technologies</option>
+                <option>Mobile Technologies</option>
+                <option>AR/VR</option>
+                <option>Cloud</option>
+                <option>Machine Learning</option>
+              </select>
+            </div>
+          )}
         </div>
       </div>
     </div>
