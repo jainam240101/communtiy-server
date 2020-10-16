@@ -12,6 +12,7 @@ export const useForm = (initialValues: any) => {
         [name]: value,
       };
       values.current = currentState;
+      console.log(values)
       return values;
     },
   };
