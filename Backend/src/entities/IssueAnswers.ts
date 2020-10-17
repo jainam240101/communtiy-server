@@ -31,6 +31,6 @@ export class IssueAnswers extends BaseEntity {
   @CreateDateColumn()
   createdAt: Date;
 
-  @Field()
+  @Field(()=>User)
   answerOwner: User;
 }

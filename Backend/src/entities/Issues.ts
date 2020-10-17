@@ -2,6 +2,7 @@
 
 import { ObjectType, Field } from "type-graphql";
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn } from "typeorm";
+import { IssueAnswers } from "./IssueAnswers";
 import { User } from "./User";
 
 @ObjectType()
@@ -34,5 +35,8 @@ export class Issue extends BaseEntity {
 
   @CreateDateColumn()
   @Field()
-  createdAt:Date
+  createdAt: Date
+  
+  @Field(() => [IssueAnswers])
+  issueAnswers:[IssueAnswers]
 }

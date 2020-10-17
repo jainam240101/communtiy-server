@@ -7,6 +7,8 @@ import {
   Arg,
   Ctx,
   Query,
+  FieldResolver,
+  Root,
 } from "type-graphql";
 import { IssueAnswers } from "../../entities/IssueAnswers";
 import { isAuth } from "../../Middlewares/UserAuth/isAuth";
@@ -20,8 +22,18 @@ import { MyContext } from "../../Types/Context";
 import { ApolloError } from "apollo-server-express";
 import { User } from "../../entities/User";
 
-@Resolver()
+@Resolver(() => IssueAnswers)
 export class issueAnswer {
+  @FieldResolver()
+  async answerOwner(@Root() parent: IssueAnswers) {
+    const user: User | undefined = await User.findOne({
+      where: {
+        uniqueid: parent.answeredBy,
+      },
+    });
+    return user;
+  }
+
   @Query(() => [IssueAnswers])
   async issueAnswers(@Arg("id") id: string) {
     if (id.length === 0) {

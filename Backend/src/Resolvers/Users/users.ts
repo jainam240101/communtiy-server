@@ -7,6 +7,8 @@ import {
   Mutation,
   Ctx,
   UseMiddleware,
+  FieldResolver,
+  Root,
 } from "type-graphql";
 import { User, UserLoginEntity } from "../../entities/User";
 import { createUserInput, loginInput, updateUserInput } from "./inputs/input";
@@ -15,14 +17,58 @@ import {
   loginResolver,
   updateUser,
   deleteUserresolver,
-  meResolver,
 } from "./utils/utils";
 import { MyContext } from "../../Types/Context";
 import { isAuth } from "../../Middlewares/UserAuth/isAuth";
 import { Project } from "../../entities/Project";
+import { ApolloError } from "apollo-server-express";
+import { Issue } from "../../entities/Issues";
+import { IssueAnswers } from "../../entities/IssueAnswers";
 
 @Resolver(() => User)
 export class UserResolver {
+  @FieldResolver()
+  async ownedprojects(@Root() parent: User) {
+    try {
+      const projects: Project[] | undefined = await Project.find({
+        where: {
+          ownerId: parent.uniqueid,
+        },
+      });
+      return projects;
+    } catch (error) {
+      throw new ApolloError("Some Error Occured");
+    }
+  }
+
+  @FieldResolver()
+  async ownedIssues(@Root() parent: User) {
+    try {
+      const Issues: Issue[] | undefined = await Issue.find({
+        where: {
+          ownerId: parent.uniqueid,
+        },
+      });
+      return Issues;
+    } catch (error) {
+      throw new ApolloError("Some Error Occured in Giving Issues");
+    }
+  }
+
+  @FieldResolver()
+  async issueAnswered(@Root() parent: User) {
+    try {
+      const issueAnswer: IssueAnswers[] | undefined = await IssueAnswers.find({
+        where: {
+          answeredBy: parent.uniqueid,
+        },
+      });
+      return issueAnswer;
+    } catch (error) {
+      throw new ApolloError("Some Error Occured in Giving Issue Answers");
+    }
+  }
+
   @Query(() => [User])
   async allUsers() {
     const users = await User.find();
@@ -41,8 +87,8 @@ export class UserResolver {
   @UseMiddleware(isAuth)
   @Query(() => User)
   async me(@Ctx() ctx: MyContext): Promise<User | undefined> {
-    const ownedProjects = await meResolver(ctx.req.currentUser.uniqueid);
-    return { ...ctx.req.currentUser, ownedprojects: ownedProjects };
+    const user: User = { ...ctx.req.currentUser };
+    return user;
   }
 
   @Mutation(() => User)

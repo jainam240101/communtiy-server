@@ -26,6 +26,7 @@ import { MyContext } from "../../Types/Context";
 import { isAuth } from "../../Middlewares/UserAuth/isAuth";
 import { User } from "../../entities/User";
 import { ApolloError } from "apollo-server-express";
+import { IssueAnswers } from "../../entities/IssueAnswers";
 
 @Resolver(() => Issue)
 export class IssueResolver {
@@ -43,6 +44,21 @@ export class IssueResolver {
     }
   }
 
+  @FieldResolver()
+  async issueAnswers(@Root() parent: Issue) {
+    try {
+      const answers: IssueAnswers[] | undefined = await IssueAnswers.find({
+        where: {
+          issueId:parent.uniqueid
+        }
+      })
+      return answers
+    } catch (error) {
+      throw new ApolloError("Issue Answers Not found");
+      
+    }
+  }
+  
   @Query(() => [Issue])
   async issuesInfo(@Arg("data") { id }: issuesInfoInput) {
     var issues: Issue | Issue[] | undefined;

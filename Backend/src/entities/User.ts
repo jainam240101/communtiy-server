@@ -3,6 +3,8 @@
 import { ObjectType, Field } from "type-graphql";
 import { Column, Entity, PrimaryGeneratedColumn, BaseEntity } from "typeorm";
 import { Project } from "./Project";
+import { Issue } from "./Issues";
+import { IssueAnswers } from "./IssueAnswers";
 
 @ObjectType()
 @Entity()
@@ -40,7 +42,13 @@ export class User extends BaseEntity {
   updatedAt: Date;
 
   @Field(() => [Project])
-  ownedprojects:[Project]
+  ownedprojects: [Project]
+  
+  @Field(() => [Issue])
+  ownedIssues:[Project]
+  
+  @Field(() => [IssueAnswers])
+  issueAnswered:[Project]
 
 }
 
