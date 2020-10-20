@@ -8,6 +8,7 @@ import {
   PrimaryColumn,
   CreateDateColumn,
 } from "typeorm";
+import { Issue } from "./Issues";
 import { User } from "./User";
 
 @ObjectType()
@@ -31,6 +32,9 @@ export class IssueAnswers extends BaseEntity {
   @CreateDateColumn()
   createdAt: Date;
 
-  @Field(()=>User)
+  @Field(() => User)
   answerOwner: User;
+
+  @Field(() => Issue)
+  issue: Issue;
 }

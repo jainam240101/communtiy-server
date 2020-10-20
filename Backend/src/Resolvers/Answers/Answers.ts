@@ -21,9 +21,25 @@ import {
 import { MyContext } from "../../Types/Context";
 import { ApolloError } from "apollo-server-express";
 import { User } from "../../entities/User";
+import { Issue } from "../../entities/Issues";
 
 @Resolver(() => IssueAnswers)
 export class issueAnswer {
+  @FieldResolver()
+  async issue(@Root() parent: IssueAnswers) {
+    try {
+      // console.log(parent);
+      const issue: Issue | undefined = await Issue.findOne({
+        where: {
+          uniqueid: parent.issueId,
+        },
+      });
+      return issue;
+    } catch (error) {
+      throw new ApolloError("Issue Not Found");
+    }
+  }
+
   @FieldResolver()
   async answerOwner(@Root() parent: IssueAnswers) {
     const user: User | undefined = await User.findOne({
