@@ -1,6 +1,7 @@
 /** @format */
 
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { cache } from "../..";
 import { findUniqueId } from "../../Custom Queries/user";
 import Edit_Delete from "../Edit_Delete/Edit_Delete";
@@ -27,9 +28,13 @@ const IssueComponent: React.FC<Props> = ({
   issueOwner,
   uniqueid,
 }) => {
+  const history = useHistory();
   const data: any = cache.readQuery({
     query: findUniqueId,
   });
+  const AnswersClick = () => {
+    history.push(`/answers/${uniqueid}`);
+  };
   return (
     <div>
       <div className={classes.Container}>
@@ -38,7 +43,9 @@ const IssueComponent: React.FC<Props> = ({
         </div>
         <div className={classes.content}>{issue}</div>
         <div className={classes.btnContainer}>
-          <button className={classes.btn}>Answers</button>
+          <button className={classes.btn} onClick={AnswersClick}>
+            Answers
+          </button>
           <p className={tag.length < 10 ? classes.smallTag : classes.bigTag}>
             {tag}
           </p>

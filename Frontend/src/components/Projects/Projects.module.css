@@ -48,8 +48,8 @@
   display: flex;
   margin-bottom: 2%;
 }
-.btn{
-  height:5vh;
+.btn {
+  height: 5vh;
   margin-top: 20px;
 }
 .techStackContainer {
@@ -65,20 +65,25 @@
 
 .rightContainer {
   /* height: 38vh; */
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
   width: auto;
 }
 
 .contact {
   font-family: "Noto Sans JP", sans-serif;
   font-size: 20px;
-  padding-left: 43%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
 .contactInfo {
   padding-top: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
   font-family: "Source Sans Pro", sans-serif;
   font-size: 20px;
@@ -102,11 +107,11 @@
   font-weight: 600;
 }
 
-.specials{
+.specials {
   margin-left: 30%;
   margin-top: 2%;
 }
 
-.Delete{
+.Delete {
   margin-top: 25%;
 }

@@ -13,6 +13,7 @@ import Edit_Delete from "../Edit_Delete/Edit_Delete";
 interface Props {
   title: string;
   description: string;
+  uniqueid: string;
   tag: string;
   techStack: string[];
   formLink: string;
@@ -25,6 +26,7 @@ interface Props {
 
 const Projects: React.FC<Props> = ({
   contact,
+  uniqueid,
   description,
   formLink,
   title,
@@ -64,7 +66,7 @@ const Projects: React.FC<Props> = ({
           </div>
           {data.me.uniqueid === contact.uniqueid ? (
             <div className={classes.specials}>
-              {/* <Edit_Delete /> */}
+              {<Edit_Delete id={uniqueid} type={"editproject"} />}
             </div>
           ) : null}
         </div>

@@ -16,6 +16,7 @@ import NewIssue from "./containers/New Issue/NewIssue";
 import NewProject from "./containers/New Project/NewProject";
 import EditIssue from "./containers/Edit Issue/EditIssue";
 import Dashboard from "./containers/Dashboard/Dashboard";
+import Answers from "./containers/Answers/Answers";
 
 const App = () => {
   const { data } = useQuery(ME);
@@ -40,6 +41,7 @@ const App = () => {
       <Route exact path='/signup' component={Signup} />
       <Route exact path='/newissue' component={NewIssue} />
       <Route exact path='/editissue/:id' component={EditIssue} />
+      <Route exact path='/answers/:id' component={Answers} />
       <Route exact path='/newproject' component={NewProject} />
       <Route exact path='/dashboard' component={Dashboard} />
     </Switch>
