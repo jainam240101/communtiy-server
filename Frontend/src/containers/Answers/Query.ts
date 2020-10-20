@@ -11,6 +11,11 @@ export const GET_ANSWERS = gql`
         name
         uniqueid
       }
+      issue {
+        issueName
+        issue
+        tag
+      }
     }
   }
 `;

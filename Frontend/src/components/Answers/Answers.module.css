@@ -1,0 +1,36 @@
+/** @format */
+
+.Container {
+  margin-top: 2%;
+  margin-bottom: 1%;
+  margin-left: 5%;
+  margin-right: 5%;
+  border: 1px solid black;
+  /* background-color: tomato; */
+}
+.answer {
+  padding-top: 1.3%;
+  padding-left: 1%;
+  padding-right: 1%;
+  font-family: "Roboto", sans-serif;
+  font-size: 17px;
+  letter-spacing: 1px;
+}
+
+.bottomContainer{
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    margin-top: 1.2%;
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right:3%;
+}
+
+.Owner{
+    color:#0984e3;
+    font-weight: bold;
+    padding-left: 0.5%;
+}
+.Owner:hover{
+    cursor: pointer;
+}
