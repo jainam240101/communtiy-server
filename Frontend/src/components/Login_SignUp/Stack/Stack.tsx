@@ -10,12 +10,14 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
 
 interface Props {
-  change: (name: string, value: string) => any;
   name: string;
+  dispatch: any;
 }
-const Stack: React.FC<Props> = ({ change, name }) => {
+const Stack: React.FC<Props> = ({ dispatch, name }) => {
   const stackChange = (event: any) => {
-    change(name, event);
+    console.log(event);
+    console.log(name);
+    dispatch({ type: "change", value: [...event], name: name });
   };
   return (
     <div>

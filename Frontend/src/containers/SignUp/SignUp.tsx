@@ -12,7 +12,7 @@ import { useMutation } from "@apollo/client";
 
 const Signup = () => {
   const [createUser] = useMutation(createUserMutation);
-  const ref = useForm({
+  const [reducerState, dispatch] = useForm({
     Name: "",
     Email: "",
     Password: "",
@@ -22,11 +22,11 @@ const Signup = () => {
   const buttonClick = () => {
     createUser({
       variables: {
-        name: ref.values.current.Name,
-        email: ref.values.current.Email,
-        password: ref.values.current.Password,
-        enrollment: ref.values.current.Enrollment,
-        description: ref.values.current.Description,
+        name: reducerState.Name,
+        email: reducerState.Email,
+        password: reducerState.Password,
+        enrollment: reducerState.Enrollment,
+        description: reducerState.Description,
       },
     });
   };
@@ -37,12 +37,18 @@ const Signup = () => {
       </div>
       <div className={classes.card}>
         <Heading Heading={"Sign Up"} />
-        <Inputs change={ref.handleChange} name={"Name"} />
-        <Inputs change={ref.handleChange} name={"Email"} />
-        <Inputs change={ref.handleChange} name={"Password"} password={true} />
-        <Inputs change={ref.handleChange} name={"Enrollment"} />
+        <Inputs defaultvalue={""} dispatch={dispatch} name={"Name"} />
+        <Inputs defaultvalue={""} dispatch={dispatch} name={"Email"} />
         <Inputs
-          change={ref.handleChange}
+          defaultvalue={""}
+          dispatch={dispatch}
+          name={"Password"}
+          password={true}
+        />
+        <Inputs defaultvalue={""} dispatch={dispatch} name={"Enrollment"} />
+        <Inputs
+          defaultvalue={""}
+          dispatch={dispatch}
           name={"Description"}
           description={true}
         />

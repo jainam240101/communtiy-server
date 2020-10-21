@@ -15,32 +15,32 @@ import { useHistory } from "react-router-dom";
 const NewIssue = () => {
   const [newIssue] = useMutation(NewIssueMutation);
   const history = useHistory();
-  const ref = useForm({
+  const [reducerState, dispatch] = useForm({
     Name: "",
     Tag: "",
     Issue: "",
   });
   const buttonClick = async () => {
-    console.log(ref.values.current.Name);
-    console.log(ref.values.current.Tag);
-    console.log(ref.values.current.Issue);
+    console.log(reducerState.Name);
+    console.log(reducerState.Tag);
+    console.log(reducerState.Issue);
     if (
-      ref.values.current.Name.length === 0 ||
-      ref.values.current.Tag.length === 0 ||
-      ref.values.current.Issue.length === 0
+      reducerState.Name.length === 0 ||
+      reducerState.Tag.length === 0 ||
+      reducerState.Issue.length === 0
     ) {
       alert("No Value Can be Left Empty");
       return;
     }
     const data: any = await newIssue({
       variables: {
-        issueName: ref.values.current.Name,
-        tag: ref.values.current.Tag,
-        issue: ref.values.current.Issue,
+        issueName: reducerState.Name,
+        tag: reducerState.Tag,
+        issue: reducerState.Issue,
       },
     });
     if (data.data.createIssue.uniqueid.length === 0) {
-      alert("Some Error Occured")
+      alert("Some Error Occured");
     }
     history.push("/issues");
   };
@@ -51,11 +51,12 @@ const NewIssue = () => {
       </div>
       <div className={classes.card}>
         <Heading Heading={"New Issue"} />
-        <Inputs change={ref.handleChange} name={"Name"} />
-        <Dropdown change={ref.handleChange} name={"Tag"} />
+        <Inputs dispatch={dispatch} defaultvalue={""} name={"Name"} />
+        <Dropdown dispatch={dispatch} name={"Tag"} />
         <Inputs
           issue_project={true}
-          change={ref.handleChange}
+          defaultvalue={""}
+          dispatch={dispatch}
           name={"Issue"}
           description={true}
         />

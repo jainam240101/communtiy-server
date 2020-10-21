@@ -5,15 +5,21 @@ import classes from "./Dropdown.module.css";
 
 interface Props {
   name: string;
-  change: (name: string, value: string) => any;
+  dispatch?: any;
 }
 
-const Dropdown: React.FC<Props> = ({ name, change }) => {
+const Dropdown: React.FC<Props> = ({ name, dispatch }) => {
   return (
     <div className={classes.container}>
       <div className={classes.heading}>{name}</div>
       <select
-        onChange={(event) => change(event.target.name, event.target.value)}
+        onChange={(event) =>
+          dispatch({
+            type: "change",
+            name: event.target.name,
+            value: event.target.value,
+          })
+        }
         name={name}
         className={classes.dropdown}>
         <option disabled selected>

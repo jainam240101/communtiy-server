@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import classes from "./Information.module.css";
 import Switcher from "../Switcher/Switcher";
 import { cache } from "../../..";
-import { gql } from "@apollo/client";
 import { ownedIssues, ownedProjects, issuesAnswered } from "./Queries";
 import Projects from "../../Projects/Projects";
 import IssueComponent from "../../Issues/Issues";

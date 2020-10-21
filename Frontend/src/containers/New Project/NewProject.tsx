@@ -16,7 +16,7 @@ import { useHistory } from "react-router-dom";
 const NewProject = () => {
   const [newProject] = useMutation(NewProjectMutation);
   const history = useHistory();
-  const ref = useForm({
+  const [reducerState, dispatch] = useForm({
     Title: "",
     Tag: "",
     Pitch: "",
@@ -25,28 +25,28 @@ const NewProject = () => {
   });
   const buttonClick = async () => {
     if (
-      ref.values.current.Title.length === 0 ||
-      ref.values.current.Tag.length === 0 ||
-      ref.values.current.Pitch.length === 0 ||
-      ref.values.current.Form_Link.length === 0 ||
-      ref.values.current.Stack.length === 0
+      reducerState.Title.length === 0 ||
+      reducerState.Tag.length === 0 ||
+      reducerState.Pitch.length === 0 ||
+      reducerState.Form_Link.length === 0 ||
+      reducerState.Stack.length === 0
     ) {
       alert("No Value Can be Left Empty");
       return;
     }
     const data: any = await newProject({
       variables: {
-        title: ref.values.current.Title,
-        definition: ref.values.current.Pitch,
-        formLink: ref.values.current.Form_Link,
-        tag: ref.values.current.Tag,
-        techStack: ref.values.current.Stack,
+        title: reducerState.Title,
+        definition: reducerState.Pitch,
+        formLink: reducerState.Form_Link,
+        tag: reducerState.Tag,
+        techStack: reducerState.Stack,
       },
     });
-     if (data.data.createProject.uniqueid.length === 0) {
-       alert("Some Error Occured");
-     }
-     history.push("/projects");
+    if (data.data.createProject.uniqueid.length === 0) {
+      alert("Some Error Occured");
+    }
+    history.push("/projects");
   };
   return (
     <div className={classes.Container}>
@@ -55,17 +55,18 @@ const NewProject = () => {
       </div>
       <div className={classes.card}>
         <Heading Heading={"New Project"} />
-        <Inputs change={ref.handleChange} name={"Title"} />
-        <Dropdown change={ref.handleChange} name={"Tag"} />
+        <Inputs defaultvalue={""} dispatch={dispatch} name={"Title"} />
+        <Dropdown dispatch={dispatch} name={"Tag"} />
         <Inputs
+          defaultvalue={""}
           issue_project={true}
-          change={ref.handleChange}
+          dispatch={dispatch}
           name={"Pitch"}
           description={true}
         />
-        <Inputs change={ref.handleChange} name={"Form_Link"} />
+        <Inputs defaultvalue={""} dispatch={dispatch} name={"Form_Link"} />
         <div className={classes.Stack}>
-          <Stack change={ref.handleChange} name={"Stack"} />
+          <Stack dispatch={dispatch} name={"Stack"} />
         </div>
         <Button
           issue_project={true}

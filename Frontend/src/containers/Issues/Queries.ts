@@ -18,3 +18,20 @@ export const all_issues = gql`
     }
   }
 `;
+
+export const issues_by_tag = gql`
+  query IssuesByTag($tag: String!) {
+    tagIssue(tag: $tag) {
+      issueName
+      issue
+      tag
+      uniqueid
+      createdAt
+      issueOwner {
+        uniqueid
+        name
+        email
+      }
+    }
+  }
+`;
