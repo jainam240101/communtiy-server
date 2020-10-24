@@ -1,7 +1,7 @@
 /** @format */
 
 import { InputType, Field } from "type-graphql";
-import { Length, IsArray } from "class-validator";
+import { Length, IsArray, IsNumber, IsString } from "class-validator";
 
 @InputType()
 export class createProjectInput {
@@ -62,4 +62,19 @@ export class deleteProjectInput {
 export class projectInfo {
   @Field({ nullable: true })
   id: string;
+
+  @IsNumber()
+  @Field()
+  limit: number;
+}
+
+@InputType()
+export class tagInput {
+  @IsString()
+  @Field({ nullable: true })
+  tag: string;
+
+  @IsString()
+  @Field({ nullable: true })
+  techStack: string;
 }

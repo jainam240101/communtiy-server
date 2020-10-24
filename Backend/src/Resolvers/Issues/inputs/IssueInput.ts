@@ -1,5 +1,6 @@
 /** @format */
 
+import { IsNumber } from "class-validator";
 import { InputType, Field } from "type-graphql";
 
 @InputType()
@@ -36,4 +37,8 @@ export class updateIssueInput {
 export class issuesInfoInput {
   @Field({ nullable: true })
   id: string;
+
+  @IsNumber()
+  @Field()
+  limit: number;
 }

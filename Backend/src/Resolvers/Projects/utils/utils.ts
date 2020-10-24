@@ -97,7 +97,7 @@ export const deleteProjectresolver = async ({
   }
 };
 
-export const projectDisplayTagResolver = async (tag: string) => {
+export const projectDisplayTagResolver = async ({ tag, techStack }: any) => {
   try {
     const projects: Project[] = await Project.find({
       where: {
@@ -105,7 +105,18 @@ export const projectDisplayTagResolver = async (tag: string) => {
       },
       order: { createdAt: "DESC" },
     });
-    return projects
+    if (techStack) {
+      const projectsTechStack: Project[] = [];
+      projects.forEach((element) => {
+        element.techStack.forEach((tech) => {
+          if (tech === techStack) {
+            projectsTechStack.push(element);
+          }
+        });
+      });
+      return projectsTechStack;
+    }
+    return projects;
   } catch (error) {
     throw new ApolloError("Some error occured");
   }

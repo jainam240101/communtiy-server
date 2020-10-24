@@ -15,6 +15,7 @@ import {
   updateProjectInput,
   deleteProjectInput,
   projectInfo,
+  tagInput,
 } from "./Inputs/Input";
 import { isAuth } from "../../Middlewares/UserAuth/isAuth";
 import {
@@ -43,7 +44,7 @@ export class ProjectResolver {
   }
 
   @Query(() => [Project])
-  async projectsInfo(@Arg("data") { id }: projectInfo) {
+  async projectsInfo(@Arg("data") { id, limit }: projectInfo) {
     var projects: Project | Project[] | undefined;
     if (id.length !== 0) {
       projects = await Project.findOne({
@@ -57,13 +58,19 @@ export class ProjectResolver {
       order: {
         createdAt: "DESC",
       },
+      take: limit,
     });
     return projects;
   }
 
   @Query(() => [Project])
-  async projectDisplayTag(@Arg("tag") tag: string): Promise<Project[]> {
-    const result: Project[] = await projectDisplayTagResolver(tag);
+  async projectDisplayTag(
+    @Arg("data") { tag, techStack }: tagInput
+  ): Promise<Project[]> {
+    const result: Project[] = await projectDisplayTagResolver({
+      tag,
+      techStack,
+    });
     return result;
   }
 

@@ -49,18 +49,17 @@ export class IssueResolver {
     try {
       const answers: IssueAnswers[] | undefined = await IssueAnswers.find({
         where: {
-          issueId:parent.uniqueid
-        }
-      })
-      return answers
+          issueId: parent.uniqueid,
+        },
+      });
+      return answers;
     } catch (error) {
       throw new ApolloError("Issue Answers Not found");
-      
     }
   }
-  
+
   @Query(() => [Issue])
-  async issuesInfo(@Arg("data") { id }: issuesInfoInput) {
+  async issuesInfo(@Arg("data") { id, limit }: issuesInfoInput) {
     var issues: Issue | Issue[] | undefined;
     if (id.length !== 0) {
       var issue: Issue | undefined = await Issue.findOne({
@@ -75,6 +74,7 @@ export class IssueResolver {
       order: {
         createdAt: "DESC",
       },
+      take: limit,
     });
     return issues;
   }
