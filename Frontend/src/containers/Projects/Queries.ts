@@ -23,8 +23,8 @@ export const all_projects = gql`
 `;
 
 export const projects_by_tag = gql`
-  query ProjectsByTag($tag: String!) {
-    projectDisplayTag(tag: $tag) {
+  query ProjectsByTag($tag: String!, $techStack: String!) {
+    projectDisplayTag(data: { tag: $tag, techStack: $techStack }) {
       uniqueid
       title
       definition

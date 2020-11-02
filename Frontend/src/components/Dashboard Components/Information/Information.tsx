@@ -1,27 +1,41 @@
 /** @format */
 
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import classes from "./Information.module.css";
 import Switcher from "../Switcher/Switcher";
-import { cache } from "../../..";
-import { ownedIssues, ownedProjects, issuesAnswered } from "./Queries";
 import Projects from "../../Projects/Projects";
 import IssueComponent from "../../Issues/Issues";
+import { Doughnut } from "@reactchartjs/react-chart.js";
+import AnswersComponent from "../../Answers/Answers";
 
-const Infromation = () => {
+interface Props {
+  ownedProjects: any[];
+  ownedIssues: any[];
+  issueAnswered: any[];
+  name: any;
+  email: any;
+  uniqueid: any;
+}
+
+const Infromation: React.FC<Props> = ({
+  issueAnswered,
+  ownedIssues,
+  ownedProjects,
+  name,
+  email,
+  uniqueid,
+}) => {
   const [controller, setcontroller] = useState("Projects");
   const [content, setcontent] = useState();
   useEffect(() => {
-    var ProjectData: any = cache.readQuery({
-      query: ownedProjects,
-    });
+    var ProjectData: any = ownedProjects;
     if (controller === "Projects" && ProjectData !== undefined) {
       var contact = {
-        name: ProjectData.me.name,
-        email: ProjectData.me.email,
-        uniqueid: ProjectData.me.uniqueid,
+        name: name,
+        email: email,
+        uniqueid: uniqueid,
       };
-      var context: any = ProjectData.me.ownedprojects.map((element: any) => (
+      var context: any = ProjectData.map((element: any) => (
         <Projects
           key={element.uniqueid}
           title={element.title}
@@ -35,18 +49,16 @@ const Infromation = () => {
       ));
       setcontent(context);
     }
-    var IssuesData: any = cache.readQuery({
-      query: ownedIssues,
-    });
+    var IssuesData: any = ownedIssues;
     if (controller === "Issues Raised" && IssuesData !== undefined) {
-      console.log(IssuesData.me);
       var contact = {
-        name: IssuesData.me.name,
-        email: IssuesData.me.email,
-        uniqueid: IssuesData.me.uniqueid,
+        name: name,
+        email: email,
+        uniqueid: uniqueid,
       };
-      var content: any = IssuesData.me.ownedIssues.map((element: any) => (
+      var content: any = IssuesData.map((element: any) => (
         <IssueComponent
+          key={element.createdAt}
           createdAt={element.createdAt}
           uniqueid={element.uniqueid}
           issue={element.issue}
@@ -57,11 +69,57 @@ const Infromation = () => {
       ));
       setcontent(content);
     }
-    var answeredIssues = cache.readQuery({
-      query: issuesAnswered,
-    });
+    var answeredIssues: any = issueAnswered;
     if (controller === "Issues Answered" && answeredIssues !== undefined) {
+      if (answeredIssues.length === 0) {
+        var content: any = (
+          <div style={{ backgroundColor: "blue" }}>
+            <h1>No Issues Have Been Answered by You</h1>
+          </div>
+        );
+        setcontent(content);
+      }
       console.log(answeredIssues);
+      var content: any = (
+        <Fragment>
+          {answeredIssues.map((element: any, index: number) => (
+            <AnswersComponent
+              key={index}
+              id={element.issueId}
+              answer={element.answer}
+              owner={{
+                name: name,
+                uniqueid: uniqueid,
+              }}
+            />
+          ))}
+        </Fragment>
+      );
+      setcontent(content);
+    }
+    if (controller === "Stats" && answeredIssues !== undefined) {
+      const issueData: any = {
+        labels: ["Issues Raised", "Issues Answered"],
+        datasets: [
+          {
+            data: [ownedIssues.length, issueAnswered.length],
+            backgroundColor: [
+              "rgba(255, 99, 132, 0.2)",
+              "rgba(54, 162, 235, 0.2)",
+            ],
+            borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)"],
+            borderWidth: 1,
+          },
+        ],
+      };
+      var content: any = (
+        <div>
+          <div>Issues Stats</div>
+          <Doughnut height={100} type={"any"} data={issueData} />
+          <br />
+        </div>
+      );
+      setcontent(content);
     }
   }, [controller]);
   const click = (element: string) => {

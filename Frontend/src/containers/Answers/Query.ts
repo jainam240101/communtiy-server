@@ -19,3 +19,31 @@ export const GET_ANSWERS = gql`
     }
   }
 `;
+
+export const loggedInQuery = gql`
+  query ReadMe {
+    me {
+      name
+      uniqueid
+      email
+      enrollment
+    }
+  }
+`;
+
+export const createAnswerMutation = gql`
+  mutation creatAnswer($issueid: String!, $answer: String!) {
+    createAnswer(data: { issueId: $issueid, answer: $answer }) {
+      issueId
+      answer
+      issue {
+        issueName
+        issue
+      }
+      answerOwner {
+        name
+        email
+      }
+    }
+  }
+`;

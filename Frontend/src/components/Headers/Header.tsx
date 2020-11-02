@@ -6,9 +6,10 @@ import classes from "./Header.module.css";
 interface Props {
   heading: string;
   tagHandler: (tag: any) => void;
+  stackHandler: (stack: any) => void;
 }
 
-const Header: React.FC<Props> = ({ heading, tagHandler }) => {
+const Header: React.FC<Props> = ({ stackHandler, heading, tagHandler }) => {
   return (
     <div className={classes.Container}>
       <div className={classes.HeadingContainer}>
@@ -29,11 +30,13 @@ const Header: React.FC<Props> = ({ heading, tagHandler }) => {
           {heading === "Issues" ? null : (
             <div className={classes.techStackContainer}>
               <p className={classes.filter}>Tech Stack</p>
-              <select className={classes.options}>
-                <option>Web Development</option>
-                <option>Mobile Development</option>
-                <option>AR/VR</option>
-                <option>Cloud</option>
+              <select
+                onChange={(e) => stackHandler(e.target.value)}
+                className={classes.options}>
+                <option>Docker</option>
+                <option>React</option>
+                <option>Angular</option>
+                <option>GraphQL</option>
                 <option>Machine Learning</option>
               </select>
             </div>

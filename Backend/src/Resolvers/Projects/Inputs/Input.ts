@@ -64,7 +64,7 @@ export class projectInfo {
   id: string;
 
   @IsNumber()
-  @Field()
+  @Field({ nullable: true })
   limit: number;
 }
 

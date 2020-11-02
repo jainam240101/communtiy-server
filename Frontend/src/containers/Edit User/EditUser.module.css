@@ -1,0 +1,21 @@
+/** @format */
+
+.Container {
+  width: 100vw;
+  /* height: 140vh;
+  max-height: 140vh; */
+  padding-bottom: 5%;
+  background-color: #eeeeee;
+}
+
+.logo {
+  padding-top: 1%;
+  padding-left: 50%;
+}
+
+.card {
+  margin-top: 2%;
+  margin-left: 33%;
+  background-color: white;
+  width: 37vw;
+}

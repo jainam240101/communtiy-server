@@ -1,7 +1,7 @@
 /** @format */
 
 import { ObjectType, Field } from "type-graphql";
-import { Column, Entity, PrimaryGeneratedColumn, BaseEntity } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, BaseEntity, CreateDateColumn } from "typeorm";
 import { Project } from "./Project";
 import { Issue } from "./Issues";
 import { IssueAnswers } from "./IssueAnswers";
@@ -35,21 +35,20 @@ export class User extends BaseEntity {
   @Column({ length: 1000 })
   description: string;
 
-  @Column()
+  @CreateDateColumn()
   createdAt: Date;
 
-  @Column()
+  @CreateDateColumn()
   updatedAt: Date;
 
   @Field(() => [Project])
-  ownedprojects: [Project]
-  
-  @Field(() => [Issue])
-  ownedIssues:[Project]
-  
-  @Field(() => [IssueAnswers])
-  issueAnswered:[Project]
+  ownedprojects: [Project];
 
+  @Field(() => [Issue])
+  ownedIssues: [Project];
+
+  @Field(() => [IssueAnswers])
+  issueAnswered: [Project];
 }
 
 @ObjectType()

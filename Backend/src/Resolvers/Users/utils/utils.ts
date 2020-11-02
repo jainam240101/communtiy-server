@@ -7,7 +7,7 @@ import { createUserInput, loginInput, updateUserInput } from "../inputs/input";
 import jwt from "jsonwebtoken";
 import { getConnection } from "typeorm";
 import { Project } from "../../../entities/Project";
-import {ApolloError } from "apollo-server-express"
+import { ApolloError } from "apollo-server-express";
 
 export const registerUser = async ({
   name,
@@ -25,8 +25,6 @@ export const registerUser = async ({
       password: hasedpassword,
       enrollment: enrollment,
       description: description,
-      createdAt: new Date(),
-      updatedAt: new Date(),
     }).save();
   } catch (error) {
     throw new ApolloError("Some Error Occured in creating a User");
@@ -63,11 +61,31 @@ export const updateUser = async ({
   email,
   password,
   description,
+  enrollment,
   user,
 }: updateUserInput) => {
   try {
     if (email !== undefined) {
+      var temp: User | undefined = await User.findOne({
+        where: {
+          email: email,
+        },
+      });
+      if (temp) {
+        throw new Error("User with this Email already Exists");
+      }
       user.email = email;
+    }
+    if (enrollment !== undefined) {
+      var temp: User | undefined = await User.findOne({
+        where: {
+          enrollment: enrollment,
+        },
+      });
+      if (temp) {
+        throw new Error("User with this Enrollment ID already Exists");
+      }
+      user.enrollment = enrollment;
     }
     if (password !== undefined) {
       const hasedpassword = await bcrypt.hash(password, 12);
@@ -76,9 +94,12 @@ export const updateUser = async ({
     if (description !== undefined) {
       user.description = description;
     }
-    user.updatedAt=new Date()
+    user.updatedAt = new Date();
     return user.save();
   } catch (error) {
+    if (error.message) {
+      throw new ApolloError(error.message);
+    }
     throw new ApolloError("Some Error occured in updating the user");
   }
 };

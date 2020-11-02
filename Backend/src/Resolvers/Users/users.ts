@@ -84,6 +84,20 @@ export class UserResolver {
     return allUsers;
   }
 
+  @Query(() => User)
+  async findUser(@Arg("id") id: String): Promise<User | undefined> {
+    try {
+      const user: User | undefined = await User.findOne({
+        where: {
+          uniqueid: id,
+        },
+      });
+      return user;
+    } catch (error) {
+      throw new ApolloError("User Not Found");
+    }
+  }
+
   @UseMiddleware(isAuth)
   @Query(() => User)
   async me(@Ctx() ctx: MyContext): Promise<User | undefined> {
@@ -109,13 +123,14 @@ export class UserResolver {
   @UseMiddleware(isAuth)
   @Mutation(() => User)
   async updateUser(
-    @Arg("data") { email, password, description }: updateUserInput,
+    @Arg("data") { email, password, description, enrollment }: updateUserInput,
     @Ctx() ctx: MyContext
   ): Promise<User | undefined> {
     return updateUser({
       email,
       password,
       description,
+      enrollment,
       user: ctx.req.currentUser,
     });
   }

@@ -67,6 +67,25 @@ export class ProjectResolver {
   async projectDisplayTag(
     @Arg("data") { tag, techStack }: tagInput
   ): Promise<Project[]> {
+    if (tag === "All") {
+      var allProjects = await Project.find({
+        order: {
+          createdAt: "DESC",
+        },
+      });
+      if (techStack) {
+        const projectsTechStack: Project[] = [];
+        allProjects.forEach((element) => {
+          element.techStack.forEach((tech) => {
+            if (tech === techStack) {
+              projectsTechStack.push(element);
+            }
+          });
+        });
+        return projectsTechStack;
+      }
+      return allProjects;
+    }
     const result: Project[] = await projectDisplayTagResolver({
       tag,
       techStack,

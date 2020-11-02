@@ -3,7 +3,7 @@
 import { gql } from "@apollo/client";
 /** @format */
 
-import React from "react";
+import React, { Fragment } from "react";
 import { cache } from "../..";
 import { findUniqueId } from "../../Custom Queries/user";
 import classes from "./Projects.module.css";
@@ -33,9 +33,44 @@ const Projects: React.FC<Props> = ({
   techStack,
   tag,
 }) => {
-  const data: any = cache.readQuery({
-    query: findUniqueId,
-  });
+  var data: any;
+  var applyButtonContent: any;
+  var editDeleteButtonContent: any;
+  try {
+    data = cache.readQuery({
+      query: findUniqueId,
+    });
+    applyButtonContent = (
+      <Fragment>
+        {data.me.uniqueid === contact.uniqueid ? (
+          <Button
+            style={{ marginLeft: "20px", marginTop: "17px", height: "5vh" }}
+            variant='contained'
+            disabled>
+            Disabled
+          </Button>
+        ) : (
+          <Button
+            style={{ marginLeft: "20px", marginTop: "17px", height: "5vh" }}
+            className={classes.btn}
+            variant='contained'
+            color='primary'>
+            Apply
+          </Button>
+        )}
+      </Fragment>
+    );
+    editDeleteButtonContent = (
+      <Fragment>
+        {data.me.uniqueid === contact.uniqueid ? (
+          <div className={classes.specials}>
+            {<Edit_Delete id={uniqueid} type={"editproject"} />}
+          </div>
+        ) : null}
+      </Fragment>
+    );
+  } catch (error) {}
+  console.log("Cached Data ", data);
   return (
     <div className={classes.Container}>
       <div className={classes.LeftContainer}>
@@ -45,30 +80,11 @@ const Projects: React.FC<Props> = ({
         </div>
         <div className={classes.description}>{description}</div>
         <div className={classes.bottomContainer}>
-          {data.me.uniqueid === contact.uniqueid ? (
-            <Button
-              style={{ marginLeft: "20px", marginTop: "17px", height: "5vh" }}
-              variant='contained'
-              disabled>
-              Disabled
-            </Button>
-          ) : (
-            <Button
-              style={{ marginLeft: "20px", marginTop: "17px", height: "5vh" }}
-              className={classes.btn}
-              variant='contained'
-              color='primary'>
-              Apply
-            </Button>
-          )}
+          {applyButtonContent}
           <div className={classes.techStackContainer}>
             <TechStack stack={techStack} />
           </div>
-          {data.me.uniqueid === contact.uniqueid ? (
-            <div className={classes.specials}>
-              {<Edit_Delete id={uniqueid} type={"editproject"} />}
-            </div>
-          ) : null}
+          {editDeleteButtonContent}
         </div>
       </div>
       <div className={classes.rightContainer}>

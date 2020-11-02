@@ -1,6 +1,6 @@
 /** @format */
 
-import React from "react";
+import React, { Fragment } from "react";
 import { useHistory } from "react-router-dom";
 import { cache } from "../..";
 import { findUniqueId } from "../../Custom Queries/user";
@@ -29,11 +29,26 @@ const IssueComponent: React.FC<Props> = ({
   uniqueid,
 }) => {
   const history = useHistory();
-  const data: any = cache.readQuery({
-    query: findUniqueId,
-  });
+  var data: any;
+  var editDeleteButtonContent: any;
+  try {
+    data = cache.readQuery({
+      query: findUniqueId,
+    });
+    editDeleteButtonContent = (
+      <Fragment>
+        {data.me.uniqueid === issueOwner.uniqueid ? (
+          <div>
+            <Edit_Delete type={"editissue"} id={uniqueid} />
+          </div>
+        ) : null}
+      </Fragment>
+    );
+  } catch (error) {}
   const AnswersClick = () => {
-    history.push(`/answers/${uniqueid}`);
+    history.push({
+      pathname: `/answers/${uniqueid}`,
+    });
   };
   return (
     <div>
@@ -49,11 +64,7 @@ const IssueComponent: React.FC<Props> = ({
           <p className={tag.length < 10 ? classes.smallTag : classes.bigTag}>
             {tag}
           </p>
-          {data.me.uniqueid === issueOwner.uniqueid ? (
-            <div>
-              <Edit_Delete type={"editissue"} id={uniqueid} />
-            </div>
-          ) : null}
+          {editDeleteButtonContent}
         </div>
       </div>
     </div>

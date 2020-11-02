@@ -11,7 +11,10 @@ interface Props {
 const Header: React.FC<Props> = ({ description, name }) => {
   return (
     <div className={classes.Container}>
-      <div className={classes.Heading}>{name}</div>
+      <div className={classes.Heading}>
+        {name}
+       
+      </div>
       <div className={classes.Description}>{description}</div>
     </div>
   );

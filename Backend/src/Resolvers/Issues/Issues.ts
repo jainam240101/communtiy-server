@@ -81,6 +81,14 @@ export class IssueResolver {
 
   @Query(() => [Issue])
   async tagIssue(@Arg("tag") tag: string): Promise<Issue[]> {
+    if (tag === "All") {
+      var allIssues = await Issue.find({
+        order: {
+          createdAt: "DESC",
+        },
+      });
+      return allIssues;
+    }
     const result: Issue[] = await tagIssueResolver(tag);
     return result;
   }

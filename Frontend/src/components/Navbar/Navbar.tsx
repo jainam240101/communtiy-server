@@ -7,20 +7,21 @@ import { NavLink } from "react-router-dom";
 import Settings from "./Plus Icon/Menu";
 import Add from "./Plus Icon/Add";
 import { cache } from "../..";
-import { gql } from "@apollo/client";
+import { findUniqueId } from "../../Custom Queries/user";
 const Navbar = () => {
   const [login, setlogin] = useState(false);
-  const data: any = cache.readQuery({
-    query: gql`
-      query IsUserLoggedIn {
-        isLoggedIn @client
-        name @client
-      }
-    `,
-  });
-  if (data !== null && login === false) {
-    setlogin(true);
-  }
+  var data: any;
+  try {
+    data = cache.readQuery({
+      query: findUniqueId,
+    });
+    if (data !== null && login === false) {
+      setlogin(true);
+    }
+    if (data === undefined) {
+      setlogin(false);
+    }
+  } catch (error) {}
   return (
     <div className={classes.Container}>
       <div className={classes.logoDiv}>
@@ -61,7 +62,7 @@ const Navbar = () => {
         <div className={classes.user}>
           <div className={classes.Avatar}>
             <p className={classes.signed}>Signed In As</p>
-            <p className={classes.usersName}>{data.name}</p>
+            <p className={classes.usersName}>{data.me.name}</p>
           </div>
           <Add />
           <div className={classes.menu}>

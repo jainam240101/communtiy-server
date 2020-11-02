@@ -1,7 +1,13 @@
-.notFound{
-    height:40vh;
-    padding-left:40%;
-    padding-top: 10%;
-    font-size: 25px;
-    font-weight: bold;
+/** @format */
+
+.notFound {
+  height: 40vh;
+  padding-left: 40%;
+  padding-top: 10%;
+  font-size: 25px;
+  font-weight: bold;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
 }

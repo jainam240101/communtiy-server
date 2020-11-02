@@ -39,6 +39,6 @@ export class issuesInfoInput {
   id: string;
 
   @IsNumber()
-  @Field()
+  @Field({ nullable: true })
   limit: number;
 }

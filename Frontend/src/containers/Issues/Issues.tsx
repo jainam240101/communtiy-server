@@ -17,18 +17,27 @@ const Issues = () => {
   const taghandler = (tag: any) => {
     getIssues({ variables: { tag: tag } });
   };
+  const stackhandler = (stack: any) => {};
   if (values.data) {
     if (values.data.tagIssue.length === 0) {
       return (
         <Page>
-          <Header tagHandler={taghandler} heading={"Projects"} />
+          <Header
+            stackHandler={stackhandler}
+            tagHandler={taghandler}
+            heading={"Projects"}
+          />
           <div className={classes.notFound}>No Issues of this Domain Found</div>
         </Page>
       );
     }
     return (
       <Page>
-        <Header tagHandler={taghandler} heading='Issues' />
+        <Header
+          stackHandler={stackhandler}
+          tagHandler={taghandler}
+          heading='Issues'
+        />
         {values.data.tagIssue.map((element: any) => (
           <IssueComponent
             key={element.uniqueid}
@@ -45,7 +54,11 @@ const Issues = () => {
   }
   return (
     <Page>
-      <Header tagHandler={taghandler} heading='Issues' />
+      <Header
+        stackHandler={stackhandler}
+        tagHandler={taghandler}
+        heading='Issues'
+      />
       {data.issuesInfo.map((element: any) => (
         <IssueComponent
           key={element.uniqueid}

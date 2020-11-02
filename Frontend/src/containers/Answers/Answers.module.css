@@ -14,33 +14,68 @@
   font-weight: 500;
   font-size: 25px;
 }
-.tag{
-    font-size: 20px;
-    margin-left: 1.3%;
-    display: block;
+.tag {
+  font-size: 20px;
+  margin-left: 1.3%;
+  display: block;
 }
-.issue{
-    font-family: 'Roboto', sans-serif;
-    margin-left:4%;
-    margin-right:4%;
-    margin-top: 1%;
-    font-size:20px;
+.issue {
+  font-family: "Roboto", sans-serif;
+  margin-left: 4%;
+  margin-right: 4%;
+  margin-top: 1%;
+  font-size: 20px;
 }
-.AnswersHeading{
-    margin-top: 2%;
-    font-family: "Commissioner", sans-serif;
-    font-weight: bold;
-    /* background-color: tomato; */
-    font-size:25px;
-    display: flex;
-    justify-content: center;
+.AnswersHeading {
+  margin-top: 2%;
+  font-family: "Commissioner", sans-serif;
+  font-weight: bold;
+  /* background-color: tomato; */
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
 }
 
-.noAnswers{
-    font-family: "Commissioner", sans-serif;
-    font-weight: bold;
-    font-size: 27px;
-    height:40vh;
-    padding-left: 35%;
-    padding-top: 14%;
+.noAnswers {
+  font-family: "Commissioner", sans-serif;
+  font-weight: bold;
+  font-size: 27px;
+  /* height: 40vh; */
+  padding-left: 35%;
+  padding-top: 14%;
+  padding-bottom: 5%;
+}
+.answercontainer {
+  margin-top: 2%;
+  margin-left: 2%;
+  margin-bottom: 2%;
+}
+.answertext {
+  width: 70vw;
+  resize: vertical;
+  max-height: 80vh;
+  font-family: "Commissioner", sans-serif;
+  height: 50vh;
+  font-size: 15px;
+}
+
+.submitbtn {
+  margin-top: 1%;
+  width: 14vw;
+  text-align: center;
+  font-family: "Commissioner", sans-serif;
+  font-weight: bold;
+  font-size: 15px;
+  border: none;
+  border: 1px solid black;
+  height: 5vh;
+  background-color: #00b894;
+  color: white;
+  border-radius: 4px;
+  padding-bottom: 7px;
+  padding-top: 7px;
+}
+.btnShift {
+  margin-left: 2%;
+  margin-bottom: 2%;
 }

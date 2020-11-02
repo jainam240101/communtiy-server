@@ -46,8 +46,11 @@ export class updateUserInput {
   password: string;
 
   @Field({ nullable: true })
+  enrollment: string;
+
+  @Field({ nullable: true })
   @Length(1, 1000)
   description: string;
 
-  user:User
+  user: User;
 }

@@ -2,12 +2,12 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap");
 .Container {
-  padding-bottom: 5%;
+  padding-bottom: 2%;
 }
 .Button {
   margin-top: 5%;
-  margin-left: 10%;
-  text-align: center;
+  display: flex;
+  justify-content: center;
   border: 1px solid #4c4c4c;
   font-family: "Open Sans", sans-serif;
   letter-spacing: 1.7px;
@@ -15,5 +15,5 @@
   padding-bottom: 1%;
   border-radius: 6px;
   font-size: 20px;
-  width: 30vw;
+  width: 15vw;
 }

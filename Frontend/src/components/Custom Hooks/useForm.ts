@@ -13,7 +13,6 @@ const reducer = (state: any, action: any) => {
     case "change":
       var changedState = { ...state };
       changedState[action.name] = action.value;
-      console.log(changedState);
       return changedState;
     case "editProjectInititalState":
       var newState = { ...state };
@@ -22,7 +21,13 @@ const reducer = (state: any, action: any) => {
       newState.FormLink = action.values.FormLink;
       newState.Tag = action.values.Tag;
       newState.TechStack = action.values.TechStack;
-      console.log(newState);
+      return newState;
+    case "edituserInitialState":
+      var newState = { ...state };
+      newState.Description = action.values.Description;
+      newState.Email = action.values.Email;
+      newState.Enrollment = action.values.Enrollment;
+      newState.Password = action.values.Password;
       return newState;
     default:
       return state;

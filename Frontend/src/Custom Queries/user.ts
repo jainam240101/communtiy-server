@@ -62,9 +62,10 @@ export const ME = gql`
 `;
 
 export const findUniqueId = gql`
-  query {
+  query ReadMe {
     me {
-      uniqueid @client
+      uniqueid
+      name
     }
   }
 `;

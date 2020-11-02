@@ -17,20 +17,56 @@
   letter-spacing: 1px;
 }
 
-.bottomContainer{
-    font-family: "Roboto", sans-serif;
-    font-size: 15px;
-    margin-top: 1.2%;
-    display: flex;
-    flex-direction: row-reverse;
-    margin-right:3%;
+.bottomContainer {
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  margin-top: 1.2%;
+  display: flex;
+  flex-direction: row-reverse;
+  margin-right: 3%;
 }
 
-.Owner{
-    color:#0984e3;
-    font-weight: bold;
-    padding-left: 0.5%;
+.Owner {
+  color: #0984e3;
+  font-weight: bold;
+  padding-left: 0.5%;
 }
-.Owner:hover{
-    cursor: pointer;
+.Owner:hover {
+  cursor: pointer;
+}
+
+.answercontainer {
+  margin-top: 2%;
+  margin-left: 2%;
+  margin-bottom: 2%;
+}
+.answertext {
+  width: 70vw;
+  resize: vertical;
+  max-height: 80vh;
+  font-family: "Commissioner", sans-serif;
+  height: 50vh;
+  font-size: 15px;
+}
+
+.submitbtn {
+  margin-top: 1%;
+  width: 14vw;
+  text-align: center;
+  font-family: "Commissioner", sans-serif;
+  font-weight: bold;
+  font-size: 15px;
+  border: none;
+  border: 1px solid black;
+  height: 5vh;
+  background-color: #00b894;
+  color: white;
+  border-radius: 4px;
+  padding-bottom: 7px;
+  padding-top: 7px;
+}
+
+.editDelete {
+  margin-left: 2%;
+  margin-bottom: 2%;
 }

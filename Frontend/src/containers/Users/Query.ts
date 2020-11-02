@@ -2,9 +2,9 @@
 
 import { gql } from "@apollo/client";
 
-export const query = gql`
-  query Readme {
-    me {
+export const findUser = gql`
+  query User($id: String!) {
+    findUser(id: $id) {
       uniqueid
       name
       enrollment
