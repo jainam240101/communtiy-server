@@ -12,11 +12,6 @@
 This is a college portal that allows students to put on their project idea to others and ask for help on it specifying the techs skills that one needs to create a project. 
 It also lets the users create threads for the issues they are facing and can get help by their fellow students
 
-### Source Code
-<ul>
-  <li><a href="https://github.com/jainam240101/JazzBike/tree/Frontend">Frontend </a></li>
-  <li><a href="https://github.com/jainam240101/JazzBike">Backend</a></li>
-</ul>  
 
 
 ### Built With
